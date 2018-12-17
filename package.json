@@ -1,0 +1,9 @@
+{
+  "name": "clever-kid-game",
+  "version": "1.0.0",
+  "description": "Rolling Scopes School game task",
+  "main": "./src/index.js",
+  "repository": "git@github.com:DimaDK24/clever-kid-game.git",
+  "author": "DimaDK <DimaKrutDK@ya.ru>",
+  "license": "MIT"
+}
