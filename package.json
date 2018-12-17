@@ -5,7 +5,9 @@
   "main": "./src/index.js",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js "
+    "build": "webpack --config webpack.prod.js ",
+    "lint": "eslint ./src/*",
+    "prebuild": "yarn lint"
   },
   "repository": "git@github.com:DimaDK24/clever-kid-game.git",
   "author": "DimaDK <DimaKrutDK@ya.ru>",
@@ -17,6 +19,11 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "error-overlay-webpack-plugin": "^0.1.5",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "2.14.0",
+    "eslint-plugin-jsx-a11y": "6.1.1",
+    "eslint-plugin-react": "7.11.0",
     "html-webpack-plugin": "^3.2.0",
     "react-hot-loader": "^4.5.3",
     "webpack": "^4.27.1",
