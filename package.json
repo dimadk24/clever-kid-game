@@ -12,6 +12,11 @@
     "predeploy": "yarn build",
     "test": "jest"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "\\.scss$": "<rootDir>/__mocks__/styleMock.js"
+    }
+  },
   "repository": "git@github.com:DimaDK24/clever-kid-game.git",
   "author": "DimaDK <DimaKrutDK@ya.ru>",
   "license": "MIT",
