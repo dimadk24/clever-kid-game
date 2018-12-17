@@ -1,7 +1,8 @@
-const merge = require('webpack-merge')
-const CleanWebpackPlugin = require('clean-webpack-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const commonConfig = require('./webpack.common')
+/* eslint-disable import/no-extraneous-dependencies */
+const merge = require('webpack-merge');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const commonConfig = require('./webpack.common');
 
 const config = merge(commonConfig, {
   mode: 'production',
@@ -20,13 +21,13 @@ const config = merge(commonConfig, {
         keepClosingSlash: true,
         minifyJS: true,
         minifyCSS: true,
-        minifyURLs: true
-      }
-    })
+        minifyURLs: true,
+      },
+    }),
   ],
   output: {
     filename: '[name].[chunkhash].js',
-  }
-})
+  },
+});
 
-module.exports = config
+module.exports = config;

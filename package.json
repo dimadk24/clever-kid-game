@@ -2,7 +2,7 @@
   "name": "clever-kid-game",
   "version": "1.0.0",
   "description": "Rolling Scopes School game task",
-  "main": "./src/index.js",
+  "main": "src/index.jsx",
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js ",

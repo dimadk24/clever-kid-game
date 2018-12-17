@@ -1,8 +1,9 @@
+/* eslint-disable import/no-extraneous-dependencies */
+const webpack = require('webpack');
 const merge = require('webpack-merge');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
 const commonConfig = require('./webpack.common');
-const webpack = require('webpack');
 
 const config = merge(commonConfig, {
   mode: 'development',
@@ -23,7 +24,7 @@ const config = merge(commonConfig, {
   ],
   output: {
     filename: '[name].chunk.js',
-  }
+  },
 });
 
 module.exports = config;
