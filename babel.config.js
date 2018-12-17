@@ -1,13 +1,13 @@
-const presets = [
-  [
-    '@babel/env',
-    {
-      useBuiltIns: 'usage'
-    }
+module.exports = {
+  presets: [
+    [
+      '@babel/env',
+      {
+        useBuiltIns: 'usage'
+      }
+    ],
+    [
+      '@babel/preset-react'
+    ]
   ],
-  [
-    '@babel/preset-react'
-  ]
-]
-
-module.exports = {presets}
+}
