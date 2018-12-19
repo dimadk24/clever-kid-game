@@ -1,0 +1,31 @@
+.character__health,
+.character__health__progress {
+  height: 25px;
+  width: 200px;
+}
+
+.character__health {
+  position: relative;
+  margin-bottom: 5px;
+  overflow: hidden;
+  background: orangered;
+  border-radius: 7px;
+
+  .character__health__text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 2px;
+    text-shadow: #fff 0 0 10px;
+    font-weight: bold;
+    font-size: larger;
+  }
+
+  .character__health__progress {
+    background: antiquewhite;
+    position: absolute;
+    top: 0;
+    transition-duration: 300ms;
+  }
+
+}
