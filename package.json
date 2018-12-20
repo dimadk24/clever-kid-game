@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js ",
-    "lint": "eslint ./src/**/*.js*",
+    "lint": "eslint ./src/**/*.js?",
     "prebuild": "yarn lint",
     "deploy": "gh-pages -d dist",
     "predeploy": "yarn build",
