@@ -56,4 +56,13 @@ describe('Button', () => {
     expect(tree.children).toHaveLength(1);
     expect(tree.children).toContain('super test text');
   });
+
+  it('should pass all unknown props down to button', () => {
+    const callback = jest.fn(() => ({ a: 1 }));
+    const component = renderer.create(
+      <Button onClick={callback}>test</Button>,
+    );
+    const tree = component.toJSON();
+    expect(tree.props.onClick).toBe(callback);
+  });
 });
