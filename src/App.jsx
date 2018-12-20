@@ -3,6 +3,7 @@ import './App.scss';
 import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
+import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <CharacterWindow health={100} name="Robot" position={RIGHT} />
       <Hero />
       <Monster />
+      <SettingsWindow onChangeSound={() => ({})} />
     </div>
   );
 }
