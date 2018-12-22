@@ -1,0 +1,38 @@
+.task__window {
+  position: absolute;
+  left: 35%;
+  top: 40%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 15px;
+}
+
+.task__window__close {
+  align-self: flex-end;
+  font-size: larger;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.task__window__close:hover,
+.task__window__close:active {
+  color: #be0a0a;
+  background-color: white;
+}
+
+.task__window__send {
+  width: 50%;
+  margin: 15px 0 5px;
+}
+
+.task__window__question {
+  width: 60%;
+}
+
+.task__window__input {
+  margin-left: 5px;
+  width: 60%;
+}
