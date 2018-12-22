@@ -15,7 +15,8 @@
   "jest": {
     "moduleNameMapper": {
       "\\.(scss|css|png|jpg|gif|svg|eot|woff|woff2|ttf)$": "<rootDir>/__mocks__/mock.js"
-    }
+    },
+    "setupTestFrameworkScriptFile": "<rootDir>/TestSetup.js"
   },
   "repository": "git@github.com:DimaDK24/clever-kid-game.git",
   "author": "DimaDK <DimaKrutDK@ya.ru>",
@@ -29,6 +30,8 @@
     "babel-loader": "^8.0.4",
     "clean-webpack-plugin": "^1.0.0",
     "css-loader": "^2.0.1",
+    "enzyme": "^3.8.0",
+    "enzyme-adapter-react-16": "^1.7.1",
     "error-overlay-webpack-plugin": "^0.1.5",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
@@ -39,6 +42,7 @@
     "gh-pages": "^2.0.1",
     "html-webpack-plugin": "^3.2.0",
     "jest": "^23.6.0",
+    "jest-enzyme": "^7.0.1",
     "node-sass": "^4.11.0",
     "react-hot-loader": "^4.5.3",
     "react-test-renderer": "^16.6.3",
