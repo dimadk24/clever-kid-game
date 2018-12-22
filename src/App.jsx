@@ -4,6 +4,7 @@ import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/Chara
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
 import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
+import SpellWindow from './Components/SpellWindow/SpellWindow';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Hero />
       <Monster />
       <SettingsWindow onChangeSound={() => ({})} />
+      <SpellWindow onHeal={() => ({})} onAttack={() => ({})} />
     </div>
   );
 }
