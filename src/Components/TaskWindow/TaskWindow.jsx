@@ -101,3 +101,4 @@ TaskWindow.propTypes = {
 };
 
 export default TaskWindow;
+export { validateSolution, convertTaskToStringQuestion };
