@@ -57,23 +57,30 @@ class TaskWindow extends Component {
         <Button onClick={this.onClose} className="task__window__close">
           <i className="icon-close" />
         </Button>
-        <div className="task__window__question">
-          <span>
-            {question}
-            =
-          </span>
-          <input
-            className="task__window__input"
-            type="text"
-            onChange={e => this.onInputChange(e)}
-          />
-        </div>
-        <Button
-          className="task__window__send"
-          onClick={() => this.send(task, userSolution)}
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            this.send(task, userSolution);
+          }}
         >
-            Send
-        </Button>
+          <div className="task__window__question">
+            <span>
+              {question}
+              =
+            </span>
+            <input
+              className="task__window__input"
+              type="text"
+              onChange={e => this.onInputChange(e)}
+            />
+          </div>
+          <Button
+            className="task__window__send"
+            type="submit"
+          >
+              Send
+          </Button>
+        </form>
       </div>
     );
   }
