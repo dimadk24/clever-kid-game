@@ -6,16 +6,21 @@ import Button from '../Helpers/Button/Button';
 
 
 function validateSolution(task, solution) {
-  if (task.type !== 'math') {
-    throw new Error('validating solutions for this kind of task is not implemented yet');
+  const { type } = task;
+  if (type !== 'math') {
+    throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
   return task.math.solution === solution;
 }
 
 function convertTaskToStringQuestion(task) {
-  const { math } = task;
-  const { operands } = math;
-  return `${operands[0]}${math.sign}${operands[1]}`;
+  const { type } = task;
+  if (type === 'math') {
+    const { math } = task;
+    const { operands } = math;
+    return `${operands[0]}${math.sign}${operands[1]}`;
+  }
+  throw new Error(`Unknown task type: ${type}`);
 }
 
 class TaskWindow extends Component {
