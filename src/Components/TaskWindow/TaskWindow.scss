@@ -1,11 +1,18 @@
 .task__window {
   top: 40%;
+  width: 200px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
   padding: 10px;
   border-radius: 15px;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .task__window__close {
@@ -27,7 +34,12 @@
 }
 
 .task__window__question {
-  width: 60%;
+  width: 70%;
+
+  input {
+    border: 1px solid black;
+    padding: 3px 5px;
+  }
 }
 
 .task__window__input {
