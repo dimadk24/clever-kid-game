@@ -81,6 +81,7 @@ class App extends Component {
         <SpellWindow
           onHeal={() => this.showTask({ type: 'heal' })}
           onAttack={() => this.showTask({ type: 'attack' })}
+          healIsActive={hero.health < MAX_HEALTH}
         />
         {
           showingTask
