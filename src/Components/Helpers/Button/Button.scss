@@ -1,13 +1,22 @@
 .button {
-  cursor: pointer;
-  border: 1px solid black;
+  border-style: solid;
+  border-width: 1px;
   background-color: transparent;
   border-radius: 5px;
   padding: 5px 10px;
   transition-duration: 300ms;
 }
 
-.button:hover,
-.button:active {
+.button:enabled {
+  cursor: pointer;
+  border-color: black;
+}
+
+.button:disabled {
+  border-color: grey;
+}
+
+.button:hover:enabled,
+.button:active:enabled {
   background-color: antiquewhite;
 }
