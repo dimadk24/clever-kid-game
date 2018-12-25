@@ -1,17 +1,17 @@
-.character__health,
-.character__health__progress {
+.health-bar,
+.health-bar__progress {
   height: 25px;
   width: 200px;
 }
 
-.character__health {
+.health-bar {
   position: relative;
   margin-bottom: 5px;
   overflow: hidden;
   background: orangered;
   border-radius: 7px;
 
-  .character__health__text {
+  .health-bar__text {
     position: relative;
     z-index: 2;
     text-align: center;
@@ -21,7 +21,7 @@
     font-size: larger;
   }
 
-  .character__health__progress {
+  .health-bar__progress {
     background: antiquewhite;
     position: absolute;
     top: 0;

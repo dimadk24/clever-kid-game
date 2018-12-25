@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './CharacterWindow.scss';
-import CharacterHeath from './CharacterHealth/CharacterHeath';
+import HealthBar from './CharacterHealth/HealthBar';
 
 const RIGHT = 'right';
 const LEFT = 'left';
@@ -21,7 +21,7 @@ function CharacterWindow({ name, health, position }) {
   return (
     <div className="character__window" style={wrapperStyle}>
       <p className="character__name">{name}</p>
-      <CharacterHeath number={health} />
+      <HealthBar number={health} />
     </div>
   );
 }
