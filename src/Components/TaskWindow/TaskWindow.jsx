@@ -5,6 +5,7 @@ import './TaskWindow.scss';
 import '../utils.scss';
 import Button from '../Helpers/Button/Button';
 
+const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
 const NOT_ANSWERED = 'not answered';
 const SUCCESS = 'success';
 const FAIL = 'fail';
@@ -29,12 +30,13 @@ function convertTaskToStringQuestion(task) {
 }
 
 function generateWindowClassName(answerType) {
-  const initialClassName = 'task__window horizontal-center';
-  if (answerType !== NOT_ANSWERED) {
-    if (answerType === SUCCESS) return `${initialClassName} ${SUCCESS}`;
-    return `${initialClassName} ${FAIL}`;
+  if (![SUCCESS, FAIL, NOT_ANSWERED].includes(answerType)) {
+    throw new Error(`wrong answerType: ${answerType}`);
   }
-  return initialClassName;
+  if (answerType === NOT_ANSWERED) {
+    return INITIAL_WINDOW_CLASS_NAME;
+  }
+  return `${INITIAL_WINDOW_CLASS_NAME} ${answerType}`;
 }
 
 class TaskWindow extends Component {
