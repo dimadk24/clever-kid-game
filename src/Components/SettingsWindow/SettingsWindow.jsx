@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../../assets/fonts/fontello/css/fontello.css';
 import './SettingsWindow.scss';
+import '../utils.scss';
 import Button from '../Helpers/Button/Button';
 
 function createSoundIconClass(soundState) {
@@ -30,7 +31,7 @@ class SettingsWindow extends Component {
     const { soundOn } = this.state;
     const soundIconClass = createSoundIconClass(soundOn);
     return (
-      <div className="settings__window">
+      <div className="settings__window horizontal-center">
         <Button
           className="no-sound-wrapper"
           onClick={() => this.onChangeSound()}

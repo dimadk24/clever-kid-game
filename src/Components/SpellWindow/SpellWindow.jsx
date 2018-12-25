@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Helpers/Button/Button';
 import './SpellWindow.scss';
+import '../utils.scss';
 
 function SpellWindow({ onHeal, onAttack }) {
   return (
-    <div className="spell__window">
+    <div className="spell__window horizontal-center">
       <Button onClick={onHeal} className="heal-button">
         Heal
       </Button>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../../assets/fonts/fontello/css/fontello.css';
 import './TaskWindow.scss';
+import '../utils.scss';
 import Button from '../Helpers/Button/Button';
 
 
@@ -53,7 +54,7 @@ class TaskWindow extends Component {
     }
     const { userSolution } = this.state;
     return (
-      <div className="task__window">
+      <div className="task__window horizontal-center">
         <Button onClick={this.onClose} className="task__window__close">
           <i className="icon-close" />
         </Button>
