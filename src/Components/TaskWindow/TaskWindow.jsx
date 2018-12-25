@@ -130,4 +130,12 @@ TaskWindow.propTypes = {
 };
 
 export default TaskWindow;
-export { validateSolution, convertTaskToStringQuestion };
+export {
+  validateSolution,
+  convertTaskToStringQuestion,
+  generateWindowClassName,
+  NOT_ANSWERED,
+  SUCCESS,
+  FAIL,
+  INITIAL_WINDOW_CLASS_NAME,
+};
