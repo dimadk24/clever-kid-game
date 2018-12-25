@@ -8,7 +8,6 @@ function CharacterHeath({ number }) {
     <div className="character__health">
       <p className="character__health__text">
         {number}
-        %
       </p>
       <div className="character__health__progress" style={{ left: `${number}%` }} />
     </div>
