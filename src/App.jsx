@@ -7,24 +7,58 @@ import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/SpellWindow/SpellWindow';
 import TaskWindow from './Components/TaskWindow/TaskWindow';
 
+const MAX_HEALTH = 100;
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showingTask: false,
       hero: {
-        health: 100,
+        health: MAX_HEALTH,
         name: 'DimaDK',
       },
       monster: {
-        health: 100,
+        health: MAX_HEALTH,
         name: 'Robot',
       },
     };
   }
 
-  showTask() {
-    this.setState({ showingTask: true });
+
+  onSuccess() {
+    const { taskType } = this.state;
+    if (taskType === 'heal') {
+      this.updateHeroHealth(+25);
+    } else if (taskType === 'attack') {
+      this.updateMonsterHealth(-25);
+    }
+  }
+
+  updateHeroHealth(value) {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.hero.health += value;
+      if (newState.hero.health > MAX_HEALTH) {
+        newState.hero.health = MAX_HEALTH;
+      }
+      return newState;
+    });
+  }
+
+  updateMonsterHealth(value) {
+    this.setState((prevState) => {
+      const newState = { ...prevState };
+      newState.monster.health += value;
+      return newState;
+    });
+  }
+
+  showTask({ type }) {
+    this.setState({
+      showingTask: true,
+      taskType: type,
+    });
   }
 
   render() {
@@ -44,14 +78,17 @@ class App extends Component {
         <Hero />
         <Monster />
         <SettingsWindow onChangeSound={() => ({})} />
-        <SpellWindow onHeal={() => this.showTask()} onAttack={() => this.showTask()} />
+        <SpellWindow
+          onHeal={() => this.showTask({ type: 'heal' })}
+          onAttack={() => this.showTask({ type: 'attack' })}
+        />
         {
           showingTask
           && (
             <TaskWindow
               task={task}
               onFail={() => ({})}
-              onSuccess={() => () => ({})}
+              onSuccess={() => this.onSuccess()}
               onClose={() => this.setState({ showingTask: false })}
             />
           )
