@@ -15,6 +15,20 @@
   }
 }
 
+.task__window.success,
+.task__window.fail {
+  border-width: 4px;
+  border-style: solid;
+}
+
+.task__window.success {
+  border-color: #48d248;
+}
+
+.task__window.fail {
+  border-color: darkred;
+}
+
 .task__window__close {
   align-self: flex-end;
   font-size: larger;

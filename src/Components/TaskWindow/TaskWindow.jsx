@@ -5,6 +5,10 @@ import './TaskWindow.scss';
 import '../utils.scss';
 import Button from '../Helpers/Button/Button';
 
+const NOT_ANSWERED = 'not answered';
+const SUCCESS = 'success';
+const FAIL = 'fail';
+const TIME_BEFORE_CLOSE = 1000;
 
 function validateSolution(task, solution) {
   const { type } = task;
@@ -24,14 +28,30 @@ function convertTaskToStringQuestion(task) {
   throw new Error(`Unknown task type: ${type}`);
 }
 
+function generateWindowClassName(answerType) {
+  const initialClassName = 'task__window horizontal-center';
+  if (answerType !== NOT_ANSWERED) {
+    if (answerType === SUCCESS) return `${initialClassName} ${SUCCESS}`;
+    return `${initialClassName} ${FAIL}`;
+  }
+  return initialClassName;
+}
+
 class TaskWindow extends Component {
   constructor(props) {
     super(props);
     this.state = {
       userSolution: '',
+      answerType: NOT_ANSWERED,
     };
-    this.onFail = () => props.onFail();
-    this.onSuccess = () => props.onSuccess();
+    this.onFail = () => {
+      props.onFail();
+      props.onClose();
+    };
+    this.onSuccess = () => {
+      props.onSuccess();
+      props.onClose();
+    };
     this.onClose = () => props.onClose();
   }
 
@@ -39,29 +59,37 @@ class TaskWindow extends Component {
     this.setState({ userSolution: parseInt(e.target.value, 10) });
   }
 
-  send(task, solution) {
+  respond(task, solution) {
+    const { userSolution } = this.state;
+    if (!userSolution) return;
     const right = validateSolution(task, solution);
-    if (right) this.onSuccess();
-    else this.onFail();
-    this.onClose();
+    if (right) {
+      this.setState({ answerType: SUCCESS });
+      setTimeout(this.onSuccess, TIME_BEFORE_CLOSE);
+    } else {
+      this.setState({ answerType: FAIL });
+      setTimeout(this.onFail, TIME_BEFORE_CLOSE);
+    }
   }
 
   render() {
     const { task } = this.props;
+    const { answerType, userSolution } = this.state;
     let question;
     if (task.type === 'math') {
       question = convertTaskToStringQuestion(task);
     }
-    const { userSolution } = this.state;
+    const answered = answerType !== NOT_ANSWERED;
+    const windowClassName = generateWindowClassName(answerType);
     return (
-      <div className="task__window horizontal-center">
+      <div className={windowClassName}>
         <Button onClick={this.onClose} className="task__window__close">
           <i className="icon-close" />
         </Button>
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            this.send(task, userSolution);
+            this.respond(task, userSolution);
           }}
         >
           <div className="task__window__question">
@@ -73,12 +101,10 @@ class TaskWindow extends Component {
               className="task__window__input"
               type="text"
               onChange={e => this.onInputChange(e)}
+              disabled={answered}
             />
           </div>
-          <Button
-            className="task__window__send"
-            type="submit"
-          >
+          <Button className="task__window__send" type="submit">
               Send
           </Button>
         </form>
