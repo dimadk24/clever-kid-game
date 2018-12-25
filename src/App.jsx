@@ -3,16 +3,19 @@ import './App.scss';
 import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
+import sleep from './Components/Helpers/utils';
 import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/SpellWindow/SpellWindow';
 import TaskWindow from './Components/TaskWindow/TaskWindow';
 
 const MAX_HEALTH = 100;
+const HEALTH_BAR_ANIMATION_TIME = 300;
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isUserTurn: true,
       showingTask: false,
       hero: {
         health: MAX_HEALTH,
@@ -26,16 +29,25 @@ class App extends Component {
   }
 
 
-  onSuccess() {
+  async onSuccess() {
     const { taskType } = this.state;
     if (taskType === 'heal') {
-      this.updateHeroHealth(+25);
+      await this.updateHeroHealth(+25);
     } else if (taskType === 'attack') {
-      this.updateMonsterHealth(-25);
+      await this.updateMonsterHealth(-25);
     }
+    await this.monsterAttack();
   }
 
-  updateHeroHealth(value) {
+  async monsterAttack() {
+    this.setState({ isUserTurn: false });
+    await sleep(500);
+    await this.updateHeroHealth(-25);
+    await sleep(500);
+    this.setState({ isUserTurn: true });
+  }
+
+  async updateHeroHealth(value) {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.hero.health += value;
@@ -44,14 +56,16 @@ class App extends Component {
       }
       return newState;
     });
+    await sleep(HEALTH_BAR_ANIMATION_TIME);
   }
 
-  updateMonsterHealth(value) {
+  async updateMonsterHealth(value) {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.monster.health += value;
       return newState;
     });
+    await sleep(HEALTH_BAR_ANIMATION_TIME);
   }
 
   showTask({ type }) {
@@ -62,7 +76,12 @@ class App extends Component {
   }
 
   render() {
-    const { hero, monster, showingTask } = this.state;
+    const {
+      hero,
+      monster,
+      showingTask,
+      isUserTurn,
+    } = this.state;
     const task = {
       type: 'math',
       math: {
@@ -78,17 +97,21 @@ class App extends Component {
         <Hero />
         <Monster />
         <SettingsWindow onChangeSound={() => ({})} />
-        <SpellWindow
-          onHeal={() => this.showTask({ type: 'heal' })}
-          onAttack={() => this.showTask({ type: 'attack' })}
-          healIsActive={hero.health < MAX_HEALTH}
-        />
+        {
+          isUserTurn && (
+            <SpellWindow
+              onHeal={() => this.showTask({ type: 'heal' })}
+              onAttack={() => this.showTask({ type: 'attack' })}
+              healIsActive={hero.health < MAX_HEALTH}
+            />
+          )
+        }
         {
           showingTask
           && (
             <TaskWindow
               task={task}
-              onFail={() => ({})}
+              onFail={() => this.monsterAttack()}
               onSuccess={() => this.onSuccess()}
               onClose={() => this.setState({ showingTask: false })}
             />
