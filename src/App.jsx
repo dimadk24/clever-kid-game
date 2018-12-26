@@ -28,7 +28,6 @@ class App extends Component {
     };
   }
 
-
   async onSuccess() {
     const { taskType } = this.state;
     if (taskType === 'heal') {
