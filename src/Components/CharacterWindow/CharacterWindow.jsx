@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import './CharacterWindow.scss';
-import HealthBar from './CharacterHealth/HealthBar';
+import HealthBar from './HealthBar/HealthBar';
 
 const RIGHT = 'right';
 const LEFT = 'left';
