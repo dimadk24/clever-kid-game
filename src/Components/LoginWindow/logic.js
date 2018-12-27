@@ -46,4 +46,4 @@ async function login(username, password) {
   }
 }
 
-export { signup, login };
+export { signup, login, errorFromMapOrDefault };
