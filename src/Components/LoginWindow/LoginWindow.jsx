@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Button from '../Helpers/Button/Button';
 import '../utils.scss';
+import Loader from '../Helpers/Loader/Loader';
 import { login, signup } from './logic';
 import './LoginWindow.scss';
 
@@ -46,12 +47,15 @@ class LoginWindow extends Component {
   async onLogIn() {
     const { username, password } = this.state;
     if (!this.validateInput({ username, password })) return;
+    this.setState({ loading: true });
     try {
       await login(username, password);
       this.logInCallback(username);
     } catch ({ message: errorText }) {
       this.setState({ errorText });
       return;
+    } finally {
+      this.setState({ loading: false });
     }
     this.logInCallback(username);
   }
@@ -59,11 +63,14 @@ class LoginWindow extends Component {
   async onSignUp() {
     const { username, password } = this.state;
     if (!this.validateInput({ username, password })) return;
+    this.setState({ loading: true });
     try {
       await signup(username, password);
     } catch ({ message: errorText }) {
       this.setState({ errorText });
       return;
+    } finally {
+      this.setState({ loading: false });
     }
     this.logInCallback(username);
   }
@@ -90,7 +97,7 @@ class LoginWindow extends Component {
   }
 
   render() {
-    const { errors, errorText } = this.state;
+    const { errors, errorText, loading } = this.state;
     const initialRowClass = 'login-window__row';
     const usernameInputClasses = classNames(
       initialRowClass,
@@ -120,6 +127,7 @@ class LoginWindow extends Component {
           </label>
         </div>
         <div className={errorMessageClasses}>{errorText}</div>
+        {loading && <Loader />}
         <div className="login-window__input-row">
           <Button onClick={() => this.onLogIn()}>Log in</Button>
           <Button onClick={() => this.onSignUp()}>Sign up</Button>
