@@ -32,6 +32,7 @@ class ScoreWindow extends Component {
     const { scores } = this.state;
     return (
       <div className="score-window horizontal-center">
+        <h3 className="score-window__name">ScoreBoard</h3>
         <p className="score-window__header">
           <span>Username</span>
           <span>Score</span>
