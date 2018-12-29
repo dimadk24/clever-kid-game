@@ -59,6 +59,7 @@
     "firebase": "^5.7.1",
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
-    "react-dom": "^16.6.3"
+    "react-dom": "^16.6.3",
+    "spinkit": "^1.2.5"
   }
 }
