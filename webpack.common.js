@@ -5,7 +5,7 @@ module.exports = {
     index: './src/index.jsx',
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.js', '.jsx', '.json'],
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
