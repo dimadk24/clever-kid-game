@@ -104,6 +104,7 @@ class TaskWindow extends Component {
               type="text"
               onChange={e => this.onInputChange(e)}
               disabled={answered}
+              autoFocus
             />
           </div>
           <Button className="task__window__send" type="submit">

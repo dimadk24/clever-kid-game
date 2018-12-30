@@ -3,5 +3,8 @@
     "env": {
         "browser": true,
         "jest": true
+    },
+    "rules": {
+        "jsx-a11y/no-autofocus": 0
     }
 }
