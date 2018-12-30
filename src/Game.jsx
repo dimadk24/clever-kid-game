@@ -37,6 +37,7 @@ class Game extends Component {
     let shouldMonsterAttack;
     if (taskType === 'heal') {
       await this.updateHeroHealth(+25);
+      shouldMonsterAttack = true;
     } else if (taskType === 'attack') {
       shouldMonsterAttack = await this.updateMonsterHealth(-25);
     }
