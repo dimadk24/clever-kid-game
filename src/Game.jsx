@@ -29,28 +29,32 @@ class Game extends Component {
       },
       winCount: 0,
     };
+    this.onDead = (...args) => props.onDead(...args);
   }
 
   async onSuccess() {
-    const { taskType } = this.state;
+    const { taskType, hero } = this.state;
     let shouldMonsterAttack;
     if (taskType === 'heal') {
       await this.updateHeroHealth(+25);
     } else if (taskType === 'attack') {
       shouldMonsterAttack = await this.updateMonsterHealth(-25);
     }
-    if (shouldMonsterAttack) await this.monsterAttack();
+    if (shouldMonsterAttack && hero.health) await this.monsterAttack();
   }
 
   async monsterAttack() {
+    const { hero } = this.state;
     this.setState({ isUserTurn: false });
     await sleep(500);
     await this.updateHeroHealth(-25);
     await sleep(500);
-    this.setState({ isUserTurn: true });
+    if (hero.health) this.setState({ isUserTurn: true });
   }
 
   async updateHeroHealth(value) {
+    const { winCount } = this.state;
+    let isDead = false;
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.hero.health += value;
@@ -59,9 +63,11 @@ class Game extends Component {
       } else if (newState.hero.health < MIN_HEALTH) {
         newState.hero.health = MIN_HEALTH;
       }
+      if (newState.hero.health === 0) isDead = true;
       return newState;
     });
     await sleep(HEALTH_BAR_ANIMATION_TIME);
+    if (isDead) this.onDead(winCount);
   }
 
   async updateMonsterHealth(value) {
@@ -142,6 +148,7 @@ class Game extends Component {
 
 Game.propTypes = {
   username: PropTypes.string.isRequired,
+  onDead: PropTypes.func.isRequired,
 };
 
 export default Game;
