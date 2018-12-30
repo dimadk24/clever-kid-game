@@ -50,7 +50,6 @@ class LoginWindow extends Component {
     this.setState({ loading: true });
     try {
       await login(username, password);
-      this.logInCallback(username);
     } catch ({ message: errorText }) {
       this.setState({ errorText });
       return;
