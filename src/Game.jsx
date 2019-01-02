@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
-import sleep from './Components/Helpers/utils';
+import { sleep } from './Components/Helpers/utils';
 import MonsterCounterWindow from './Components/MonsterCounterWindow/MonsterCounterWindow';
 import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/SpellWindow/SpellWindow';

@@ -4,17 +4,13 @@ import '../../assets/fonts/fontello/css/fontello.css';
 import './SettingsWindow.scss';
 import '../utils.scss';
 import Button from '../Helpers/Button/Button';
+import { shouldHandleShortcutEvent } from '../Helpers/utils';
 
 const sKeyCode = 83;
 
 function createSoundIconClass(soundState) {
   if (soundState) return 'sound-on';
   return 'sound-off';
-}
-
-function shouldHandleKeyEvent(tagName) {
-  const lowerCaseTagName = tagName.toLowerCase();
-  return !(['input', 'select', 'textarea'].includes(lowerCaseTagName));
 }
 
 class SettingsWindow extends Component {
@@ -32,7 +28,7 @@ class SettingsWindow extends Component {
   }
 
   onKeyDown({ keyCode, target }) {
-    if (!shouldHandleKeyEvent(target.tagName)) return;
+    if (!shouldHandleShortcutEvent(target.tagName)) return;
     if (keyCode === sKeyCode) this.onChangeSound();
   }
 
