@@ -116,7 +116,7 @@ class LoginWindow extends Component {
         <div className={usernameInputClasses}>
           <label htmlFor="username-input">
             <span className="login-window__label">Username:</span>
-            <input type="text" id="username-input" onChange={e => this.onUsernameChange(e)} />
+            <input type="text" id="username-input" onChange={e => this.onUsernameChange(e)} autoFocus />
           </label>
         </div>
         <div className={passwordInputClasses}>
