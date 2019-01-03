@@ -4,7 +4,7 @@ import '../../assets/fonts/fontello/css/fontello.css';
 import './TaskWindow.scss';
 import '../utils.scss';
 import Button from '../Helpers/Button/Button';
-import { generateMathTask } from './logic';
+import { convertTaskToStringQuestion, generateMathTask, validateSolution } from './logic';
 
 const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
 const NOT_ANSWERED = 'not answered';
@@ -12,24 +12,6 @@ const SUCCESS = 'success';
 const FAIL = 'fail';
 const TIME_BEFORE_CLOSE = 1000;
 const ESCAPE = 'Escape';
-
-function validateSolution(task, solution) {
-  const { type } = task;
-  if (type !== 'math') {
-    throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
-  }
-  return task.math.solution === solution;
-}
-
-function convertTaskToStringQuestion(task) {
-  const { type } = task;
-  if (type === 'math') {
-    const { math } = task;
-    const { operands } = math;
-    return `${operands[0]}${math.sign}${operands[1]}`;
-  }
-  throw new Error(`Unknown task type: ${type}`);
-}
 
 function generateWindowClassName(answerType) {
   if (![SUCCESS, FAIL, NOT_ANSWERED].includes(answerType)) {
