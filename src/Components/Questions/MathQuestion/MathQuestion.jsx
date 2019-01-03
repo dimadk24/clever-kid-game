@@ -4,12 +4,15 @@ import React from 'react';
 
 function MathQuestion({ operands, sign }) {
   return (
-    <span>
-      {operands[0]}
-      {sign}
-      {operands[1]}
-      =
-    </span>
+    <div>
+      <p>Calculate:</p>
+      <p>
+        {operands[0]}
+        {sign}
+        {operands[1]}
+        =
+      </p>
+    </div>
   );
 }
 
