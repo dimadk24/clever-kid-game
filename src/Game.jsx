@@ -132,8 +132,7 @@ class Game extends Component {
           )
         }
         {
-          showingTask
-          && (
+          showingTask && (
             <TaskWindow
               task={task}
               onFail={() => this.monsterAttack()}
