@@ -4,6 +4,7 @@ import '../../assets/fonts/fontello/css/fontello.css';
 import './TaskWindow.scss';
 import '../utils.scss';
 import Button from '../Helpers/Button/Button';
+import { generateMathTask } from './logic';
 
 const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
 const NOT_ANSWERED = 'not answered';
@@ -55,14 +56,7 @@ class TaskWindow extends Component {
       props.onClose();
     };
     this.onClose = () => props.onClose();
-    this.task = {
-      type: 'math',
-      math: {
-        operands: [2, 2],
-        sign: '+',
-        solution: 4,
-      },
-    };
+    this.task = generateMathTask();
   }
 
   onInputChange(e) {

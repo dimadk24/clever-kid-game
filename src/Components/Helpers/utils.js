@@ -7,4 +7,8 @@ function shouldHandleShortcutEvent(tagName) {
   return !(['input', 'select', 'textarea'].includes(lowerCaseTagName));
 }
 
-export { sleep, shouldHandleShortcutEvent };
+function getRandom(min, max) {
+  return Math.floor(Math.random() * (max - min) + min);
+}
+
+export { sleep, shouldHandleShortcutEvent, getRandom };
