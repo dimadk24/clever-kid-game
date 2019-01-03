@@ -55,7 +55,7 @@ class ListeningQuestion extends Component {
           )
         }
         {
-          !loaded && <Loader />
+          !loaded && <Loader size="s" />
         }
       </div>
     );
