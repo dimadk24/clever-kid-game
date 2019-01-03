@@ -11,6 +11,7 @@ const NOT_ANSWERED = 'not answered';
 const SUCCESS = 'success';
 const FAIL = 'fail';
 const TIME_BEFORE_CLOSE = 1000;
+const ESCAPE = 'Escape';
 
 function validateSolution(task, solution) {
   const { type } = task;
@@ -57,6 +58,19 @@ class TaskWindow extends Component {
     };
     this.onClose = () => props.onClose();
     this.task = generateMathTask();
+    this.keyDownCallback = e => this.onKeyDown(e);
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', this.keyDownCallback);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.keyDownCallback);
+  }
+
+  onKeyDown({ code }) {
+    if (code === ESCAPE) this.onClose();
   }
 
   onInputChange(e) {
