@@ -76,4 +76,28 @@ describe('validateSolution', () => {
     const response = validateSolution(task, '10');
     expect(response).toBeFalsy();
   });
+
+  it('should validate listening task as true', () => {
+    const task = {
+      type: 'listening',
+      listening: {
+        name: 'hello',
+        solution: 'hello',
+      },
+    };
+    const response = validateSolution(task, 'hello');
+    expect(response).toBeTruthy();
+  });
+
+  it('should validate listening task as false', () => {
+    const task = {
+      type: 'listening',
+      listening: {
+        name: 'hello',
+        solution: 'hello',
+      },
+    };
+    const response = validateSolution(task, 'star');
+    expect(response).toBeFalsy();
+  });
 });

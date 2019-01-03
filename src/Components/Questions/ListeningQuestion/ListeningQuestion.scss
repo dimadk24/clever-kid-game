@@ -1,0 +1,13 @@
+.question {
+  display: flex;
+  flex-direction: column;
+
+  .question__hint {
+    text-align: center;
+  }
+
+  .question__button {
+    margin: 7px auto;
+    width: 100px;
+  }
+}

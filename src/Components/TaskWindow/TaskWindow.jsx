@@ -4,7 +4,7 @@ import '../../assets/fonts/fontello/css/fontello.css';
 import Button from '../Helpers/Button/Button';
 import mapTaskToQuestion from '../Questions/mapper';
 import '../utils.scss';
-import { generateMathTask, validateSolution } from './logic';
+import { generateTask, validateSolution } from './logic';
 import './TaskWindow.scss';
 
 const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
@@ -40,7 +40,7 @@ class TaskWindow extends Component {
       props.onClose();
     };
     this.onClose = () => props.onClose();
-    this.task = generateMathTask();
+    this.task = generateTask();
     this.keyDownCallback = e => this.onKeyDown(e);
   }
 

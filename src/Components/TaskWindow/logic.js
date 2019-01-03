@@ -36,16 +36,45 @@ function generateMathTask() {
   };
 }
 
+function generateListeningTask() {
+  const words = ['apple', 'car', 'cat', 'dog', 'hello', 'star', 'teacher', 'town'];
+  const random = getRandom(0, 7);
+  return {
+    type: 'listening',
+    listening: {
+      name: words[random],
+      solution: words[random],
+    },
+  };
+}
+
+function generateTask() {
+  const random = getRandom(0, 2);
+  switch (random) {
+    case 0:
+      return generateMathTask();
+    case 1:
+      return generateListeningTask();
+    default:
+      throw new Error(`Bad random: ${random}. Expected it to be >=0 and < 2`);
+  }
+}
+
 function validateSolution(task, solution) {
   const { type } = task;
-  if (type !== 'math') {
-    throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
+  switch (type) {
+    case 'math':
+      return task.math.solution === parseInt(solution, 10);
+    case 'listening':
+      return task.listening.solution === solution;
+    default:
+      throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
-  return task.math.solution === parseInt(solution, 10);
 }
 
 export {
   generateMathTask,
   calculateSolution,
   validateSolution,
+  generateTask,
 };
