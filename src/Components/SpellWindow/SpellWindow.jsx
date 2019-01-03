@@ -6,8 +6,17 @@ import '../utils.scss';
 import { shouldHandleShortcutEvent } from '../Helpers/utils';
 
 class SpellWindow extends Component {
+  constructor(props) {
+    super(props);
+    this.keyUpCallback = e => this.onKeyUp(e);
+  }
+
   componentDidMount() {
-    document.addEventListener('keyup', e => this.onKeyUp(e));
+    document.addEventListener('keyup', this.keyUpCallback);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keyup', this.keyUpCallback);
   }
 
   onKeyUp({ code, target }) {

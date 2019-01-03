@@ -21,10 +21,15 @@ class SettingsWindow extends Component {
     };
     const { onChangeSound } = this.props;
     this.changeSoundCallback = (...args) => onChangeSound(...args);
+    this.keyDownCallback = e => this.onKeyDown(e);
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', e => this.onKeyDown(e));
+    document.addEventListener('keydown', this.keyDownCallback);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.keyDownCallback);
   }
 
   onKeyDown({ code, target }) {
