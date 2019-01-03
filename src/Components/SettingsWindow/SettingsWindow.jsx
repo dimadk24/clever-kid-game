@@ -20,7 +20,7 @@ class SettingsWindow extends Component {
       soundOn: true,
     };
     const { onChangeSound } = this.props;
-    this.changeSoundCallback = () => onChangeSound();
+    this.changeSoundCallback = (...args) => onChangeSound(...args);
   }
 
   componentDidMount() {
