@@ -1,9 +1,4 @@
-import {
-  generateMathTask,
-  calculateSolution,
-  validateSolution,
-  convertTaskToStringQuestion,
-} from './logic';
+import { calculateSolution, generateMathTask, validateSolution } from './logic';
 
 describe('generateMathTask', () => {
   it('should have right types', () => {
@@ -57,7 +52,7 @@ describe('validateSolution', () => {
         solution: 10,
       },
     };
-    const response = validateSolution(task, 10);
+    const response = validateSolution(task, '10');
     expect(response).toBeTruthy();
   });
 
@@ -68,7 +63,7 @@ describe('validateSolution', () => {
         solution: 10,
       },
     };
-    expect(() => validateSolution(task, 10)).toThrow(/unknown type/);
+    expect(() => validateSolution(task, '10')).toThrow(/unknown type/);
   });
 
   it('should return false if solution is wrong', () => {
@@ -78,40 +73,7 @@ describe('validateSolution', () => {
         solution: 5,
       },
     };
-    const response = validateSolution(task, 10);
+    const response = validateSolution(task, '10');
     expect(response).toBeFalsy();
-  });
-});
-
-describe('convertTaskToStringQuestion', () => {
-  it('should convert math task 1', () => {
-    const task = {
-      type: 'math',
-      math: {
-        operands: [1, 2],
-        sign: '+',
-      },
-    };
-    const questionString = '1+2';
-    expect(convertTaskToStringQuestion(task)).toBe(questionString);
-  });
-
-  it('should convert math task 2', () => {
-    const task = {
-      type: 'math',
-      math: {
-        operands: [52, 90],
-        sign: '*',
-      },
-    };
-    const questionString = '52*90';
-    expect(convertTaskToStringQuestion(task)).toBe(questionString);
-  });
-
-  it('should throw error if task type is unknown', () => {
-    const task = {
-      type: 'unknown',
-    };
-    expect(() => convertTaskToStringQuestion(task)).toThrow(/unknown/);
   });
 });

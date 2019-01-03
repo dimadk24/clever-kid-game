@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import '../../assets/fonts/fontello/css/fontello.css';
-import './TaskWindow.scss';
-import '../utils.scss';
 import Button from '../Helpers/Button/Button';
-import { convertTaskToStringQuestion, generateMathTask, validateSolution } from './logic';
+import mapTaskToQuestion from '../Questions/mapper';
+import '../utils.scss';
+import { generateMathTask, validateSolution } from './logic';
+import './TaskWindow.scss';
 
 const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
 const NOT_ANSWERED = 'not answered';
@@ -56,7 +57,7 @@ class TaskWindow extends Component {
   }
 
   onInputChange(e) {
-    this.setState({ userSolution: parseInt(e.target.value, 10) });
+    this.setState({ userSolution: e.target.value });
   }
 
   respond(solution) {
@@ -74,10 +75,6 @@ class TaskWindow extends Component {
 
   render() {
     const { answerType, userSolution } = this.state;
-    let question;
-    if (this.task.type === 'math') {
-      question = convertTaskToStringQuestion(this.task);
-    }
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
     return (
@@ -92,10 +89,9 @@ class TaskWindow extends Component {
           }}
         >
           <div className="task__window__question">
-            <span>
-              {question}
-              =
-            </span>
+            {
+              mapTaskToQuestion(this.task)
+            }
             <input
               className="task__window__input"
               type="text"
@@ -122,7 +118,6 @@ TaskWindow.propTypes = {
 export default TaskWindow;
 export {
   validateSolution,
-  convertTaskToStringQuestion,
   generateWindowClassName,
   NOT_ANSWERED,
   SUCCESS,
