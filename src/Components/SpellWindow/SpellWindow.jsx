@@ -5,6 +5,9 @@ import './SpellWindow.scss';
 import '../utils.scss';
 import { shouldHandleShortcutEvent } from '../Helpers/utils';
 
+const ATTACK_SHORTCUT_KEY = 'KeyA';
+const HEAL_SHORTCUT_KEY = 'KeyH';
+
 class SpellWindow extends Component {
   constructor(props) {
     super(props);
@@ -22,8 +25,8 @@ class SpellWindow extends Component {
   onKeyUp({ code, target }) {
     if (!shouldHandleShortcutEvent(target.tagName)) return;
     const { onAttack, onHeal, healIsActive } = this.props;
-    if (code === 'KeyA') onAttack();
-    else if (code === 'KeyH' && healIsActive) onHeal();
+    if (code === ATTACK_SHORTCUT_KEY) onAttack();
+    else if (code === HEAL_SHORTCUT_KEY && healIsActive) onHeal();
   }
 
   render() {

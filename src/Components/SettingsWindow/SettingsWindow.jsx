@@ -6,7 +6,7 @@ import '../utils.scss';
 import Button from '../Helpers/Button/Button';
 import { shouldHandleShortcutEvent } from '../Helpers/utils';
 
-const keyS = 'KeyS';
+const SHORTCUT_KEY = 'KeyS';
 
 function createSoundIconClass(soundState) {
   if (soundState) return 'sound-on';
@@ -34,7 +34,7 @@ class SettingsWindow extends Component {
 
   onKeyDown({ code, target }) {
     if (!shouldHandleShortcutEvent(target.tagName)) return;
-    if (code === keyS) this.onChangeSound();
+    if (code === SHORTCUT_KEY) this.onChangeSound();
   }
 
   onChangeSound() {
