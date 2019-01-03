@@ -16,7 +16,7 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(scss|css|png|jpg|gif|svg|eot|woff|woff2|ttf)$": "<rootDir>/__mocks__/mock.js"
+      "\\.(scss|css|png|jpg|gif|svg|eot|woff|woff2|ttf|mp3)$": "<rootDir>/__mocks__/mock.js"
     },
     "setupTestFrameworkScriptFile": "<rootDir>/TestSetup.js"
   },
