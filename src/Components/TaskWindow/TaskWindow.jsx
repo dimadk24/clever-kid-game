@@ -55,16 +55,24 @@ class TaskWindow extends Component {
       props.onClose();
     };
     this.onClose = () => props.onClose();
+    this.task = {
+      type: 'math',
+      math: {
+        operands: [2, 2],
+        sign: '+',
+        solution: 4,
+      },
+    };
   }
 
   onInputChange(e) {
     this.setState({ userSolution: parseInt(e.target.value, 10) });
   }
 
-  respond(task, solution) {
+  respond(solution) {
     const { userSolution } = this.state;
     if (!userSolution) return;
-    const right = validateSolution(task, solution);
+    const right = validateSolution(this.task, solution);
     if (right) {
       this.setState({ answerType: SUCCESS });
       setTimeout(this.onSuccess, TIME_BEFORE_CLOSE);
@@ -75,11 +83,10 @@ class TaskWindow extends Component {
   }
 
   render() {
-    const { task } = this.props;
     const { answerType, userSolution } = this.state;
     let question;
-    if (task.type === 'math') {
-      question = convertTaskToStringQuestion(task);
+    if (this.task.type === 'math') {
+      question = convertTaskToStringQuestion(this.task);
     }
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
@@ -91,7 +98,7 @@ class TaskWindow extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            this.respond(task, userSolution);
+            this.respond(userSolution);
           }}
         >
           <div className="task__window__question">
@@ -120,14 +127,6 @@ TaskWindow.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   onFail: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  task: PropTypes.shape({
-    type: PropTypes.oneOf(['math']).isRequired,
-    math: PropTypes.shape({
-      operands: PropTypes.array.isRequired,
-      sign: PropTypes.string.isRequired,
-      solution: PropTypes.number.isRequired,
-    }),
-  }).isRequired,
 };
 
 export default TaskWindow;

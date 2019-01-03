@@ -106,14 +106,6 @@ class Game extends Component {
       isUserTurn,
       winCount,
     } = this.state;
-    const task = {
-      type: 'math',
-      math: {
-        operands: [2, 2],
-        sign: '+',
-        solution: 4,
-      },
-    };
     return (
       <div className="app">
         <CharacterWindow health={hero.health} name={hero.name} position={LEFT} />
@@ -134,7 +126,6 @@ class Game extends Component {
         {
           showingTask && (
             <TaskWindow
-              task={task}
               onFail={() => this.monsterAttack()}
               onSuccess={() => this.onSuccess()}
               onClose={() => this.setState({ showingTask: false })}
