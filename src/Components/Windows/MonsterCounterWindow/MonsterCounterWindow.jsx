@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './MonsterCounterWindow.scss';
-import '../utils.scss';
+import '../../utils.scss';
 import monsterHead from './images/monster-dead-head.png';
 
 function MonsterCounterWindow({ number }) {

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import '../utils.scss';
-import Loader from '../Helpers/Loader/Loader';
+import '../../utils.scss';
+import Loader from '../../Helpers/Loader/Loader';
 import {
   getScores,
   saveUserScore,

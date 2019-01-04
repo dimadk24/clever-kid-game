@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../../assets/fonts/fontello/css/fontello.css';
+import '../../../assets/fonts/fontello/css/fontello.css';
 import './SettingsWindow.scss';
-import '../utils.scss';
-import Button from '../Helpers/Button/Button';
-import { shouldHandleShortcutEvent } from '../Helpers/utils';
+import '../../utils.scss';
+import Button from '../../Helpers/Button/Button';
+import { shouldHandleShortcutEvent } from '../../Helpers/utils';
 
 const SHORTCUT_KEY = 'KeyS';
 

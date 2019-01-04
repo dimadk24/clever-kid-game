@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import 'firebase/auth';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Button from '../Helpers/Button/Button';
-import '../utils.scss';
-import Loader from '../Helpers/Loader/Loader';
+import Button from '../../Helpers/Button/Button';
+import '../../utils.scss';
+import Loader from '../../Helpers/Loader/Loader';
 import { login, signup } from './logic';
 import './LoginWindow.scss';
 

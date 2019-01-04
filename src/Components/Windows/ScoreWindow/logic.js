@@ -1,6 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/firestore';
-import firebaseConfig from '../../../firebaseConfig';
+import firebaseConfig from '../../../../firebaseConfig';
 
 if (firebase.apps && !firebase.apps.length) firebase.initializeApp(firebaseConfig);
 const database = firebase.firestore();

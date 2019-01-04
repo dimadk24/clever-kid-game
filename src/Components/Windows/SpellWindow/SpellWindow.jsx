@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Helpers/Button/Button';
+import Button from '../../Helpers/Button/Button';
 import './SpellWindow.scss';
-import '../utils.scss';
-import { shouldHandleShortcutEvent } from '../Helpers/utils';
+import '../../utils.scss';
+import { shouldHandleShortcutEvent } from '../../Helpers/utils';
 
 const ATTACK_SHORTCUT_KEY = 'KeyA';
 const HEAL_SHORTCUT_KEY = 'KeyH';

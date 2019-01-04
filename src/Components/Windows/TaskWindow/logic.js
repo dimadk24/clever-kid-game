@@ -1,6 +1,6 @@
-import dictionary from '../../../tasks_configs/translate/dictionary';
-import words from '../../../tasks_configs/listening/words';
-import { getRandom } from '../Helpers/utils';
+import dictionary from '../../../../tasks_configs/translate/dictionary';
+import words from '../../../../tasks_configs/listening/words';
+import { getRandom } from '../../Helpers/utils';
 
 function getRandomSign() {
   const random = getRandom(0, 2);

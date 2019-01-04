@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import '../../assets/fonts/fontello/css/fontello.css';
-import Button from '../Helpers/Button/Button';
-import mapTaskToQuestion from '../Questions/mapper';
-import '../utils.scss';
+import '../../../assets/fonts/fontello/css/fontello.css';
+import Button from '../../Helpers/Button/Button';
+import mapTaskToQuestion from '../../Questions/mapper';
+import '../../utils.scss';
 import { generateTask, validateSolution } from './logic';
 import './TaskWindow.scss';
 

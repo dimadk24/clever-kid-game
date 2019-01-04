@@ -1,15 +1,15 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import Bomb, { ANIMATION_DURATION as BOMB_ANIMATION_TIME } from './Components/Bomb/Bomb';
+import Bomb, { ANIMATION_DURATION as BOMB_ANIMATION_TIME } from './Components/Animations/Bomb/Bomb';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
-import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
+import CharacterWindow, { LEFT, RIGHT } from './Components/Windows/CharacterWindow/CharacterWindow';
 import { sleep } from './Components/Helpers/utils';
-import MonsterCounterWindow from './Components/MonsterCounterWindow/MonsterCounterWindow';
-import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
-import SpellWindow from './Components/SpellWindow/SpellWindow';
-import TaskWindow from './Components/TaskWindow/TaskWindow';
-import Heal, { ANIMATION_TIME as HEAL_ANIMATION_TIME } from './Components/Heal/Heal';
+import MonsterCounterWindow from './Components/Windows/MonsterCounterWindow/MonsterCounterWindow';
+import SettingsWindow from './Components/Windows/SettingsWindow/SettingsWindow';
+import SpellWindow from './Components/Windows/SpellWindow/SpellWindow';
+import TaskWindow from './Components/Windows/TaskWindow/TaskWindow';
+import Heal, { ANIMATION_TIME as HEAL_ANIMATION_TIME } from './Components/Animations/Heal/Heal';
 
 const MAX_HEALTH = 100;
 const MIN_HEALTH = 0;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.scss';
-import LoginWindow from './Components/LoginWindow/LoginWindow';
-import ScoreWindow from './Components/ScoreWindow/ScoreWindow';
+import LoginWindow from './Components/Windows/LoginWindow/LoginWindow';
+import ScoreWindow from './Components/Windows/ScoreWindow/ScoreWindow';
 import Game from './Game';
 
 class App extends Component {
