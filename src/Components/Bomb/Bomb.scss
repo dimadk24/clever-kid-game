@@ -1,0 +1,25 @@
+$height: 100px;
+
+@keyframes bomb {
+  from {
+    top: -$height;
+  }
+  to {
+    top: 365px;
+  }
+}
+
+.bomb {
+  position: absolute;
+  z-index: 1;
+  animation-name: bomb;
+  height: $height;
+}
+
+.bomb.left {
+  left: 100px;
+}
+
+.bomb.right {
+  right: 100px;
+}

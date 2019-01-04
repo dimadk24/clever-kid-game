@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Bomb, { ANIMATION_DURATION as BOMB_ANIMATION_TIME } from './Components/Bomb/Bomb';
 import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
@@ -28,6 +29,8 @@ class Game extends Component {
         name: 'Robot',
       },
       winCount: 0,
+      animateBomb: false,
+      animationPosition: '',
     };
     this.onDead = (...args) => props.onDead(...args);
   }
@@ -53,9 +56,16 @@ class Game extends Component {
     if (hero.health) this.setState({ isUserTurn: true });
   }
 
+  async animateBomb(position) {
+    this.setState({ animateBomb: true, animationPosition: position });
+    await sleep(BOMB_ANIMATION_TIME);
+    this.setState({ animateBomb: false });
+  }
+
   async updateHeroHealth(value) {
     const { winCount } = this.state;
     let isDead = false;
+    if (value < 0) await this.animateBomb('left');
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.hero.health += value;
@@ -73,6 +83,7 @@ class Game extends Component {
 
   async updateMonsterHealth(value) {
     let shouldMonsterAttack = true;
+    if (value < 0) await this.animateBomb('right');
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.monster.health += value;
@@ -105,6 +116,8 @@ class Game extends Component {
       showingTask,
       isUserTurn,
       winCount,
+      animateBomb,
+      animationPosition,
     } = this.state;
     return (
       <div className="app">
@@ -131,6 +144,9 @@ class Game extends Component {
               onClose={() => this.setState({ showingTask: false })}
             />
           )
+        }
+        {
+          animateBomb && <Bomb position={animationPosition} />
         }
       </div>
     );
