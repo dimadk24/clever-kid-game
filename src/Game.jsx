@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 import Bomb, { ANIMATION_DURATION as BOMB_ANIMATION_TIME } from './Components/Bomb/Bomb';
-import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
+import CharacterWindow, { LEFT, RIGHT } from './Components/CharacterWindow/CharacterWindow';
 import { sleep } from './Components/Helpers/utils';
 import MonsterCounterWindow from './Components/MonsterCounterWindow/MonsterCounterWindow';
 import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
