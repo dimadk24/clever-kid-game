@@ -120,7 +120,7 @@ class Game extends Component {
       animationPosition,
     } = this.state;
     return (
-      <div className="app">
+      <div className="game">
         <CharacterWindow health={hero.health} name={hero.name} position={LEFT} />
         <MonsterCounterWindow number={winCount} />
         <CharacterWindow health={monster.health} name={monster.name} position={RIGHT} />
