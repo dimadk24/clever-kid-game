@@ -1,5 +1,9 @@
 import {
-  calculateSolution, generateListeningTask, generateMathTask, validateSolution,
+  calculateSolution,
+  generateListeningTask,
+  generateMathTask,
+  generateTranslateTask,
+  validateSolution,
 } from './logic';
 
 describe('generateMathTask', () => {
@@ -25,6 +29,18 @@ describe('generateListeningTask', () => {
     expect(listening).toBeDefined();
     expect(listening.name).toBeString();
     expect(listening.solution).toBeString();
+  });
+});
+
+describe('generateTranslateTask', () => {
+  it('should have right types', () => {
+    const task = generateTranslateTask();
+    expect(task.type).toBe('translate');
+    const { translate } = task;
+    expect(translate).toBeDefined();
+    expect(translate.word).toBeString();
+    expect(translate.solutions).toBeArray();
+    expect(translate.solutions[0]).toBeString();
   });
 });
 
@@ -112,5 +128,28 @@ describe('validateSolution', () => {
     };
     const response = validateSolution(task, 'star');
     expect(response).toBeFalsy();
+  });
+
+  it('should validate translate task as true', () => {
+    const task = {
+      type: 'translate',
+      translate: {
+        word: 'mouse',
+        solutions: ['мышь', 'мышка'],
+      },
+    };
+    expect(validateSolution(task, 'мышь')).toBeTruthy();
+    expect(validateSolution(task, 'мышка')).toBeTruthy();
+  });
+
+  it('should validate translate task as false', () => {
+    const task = {
+      type: 'translate',
+      translate: {
+        word: 'mouse',
+        solutions: ['мышь', 'мышка'],
+      },
+    };
+    expect(validateSolution(task, 'дом')).toBeFalsy();
   });
 });

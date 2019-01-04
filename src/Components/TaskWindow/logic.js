@@ -1,3 +1,4 @@
+import dictionary from '../../../tasks_configs/translate/dictionary';
 import { getRandom } from '../Helpers/utils';
 
 function getRandomSign() {
@@ -48,13 +49,27 @@ function generateListeningTask() {
   };
 }
 
+function generateTranslateTask() {
+  const randomInt = getRandom(0, dictionary.length);
+  const item = dictionary[randomInt];
+  return {
+    type: 'translate',
+    translate: {
+      word: item.word,
+      solutions: item.translations,
+    },
+  };
+}
+
 function generateTask() {
-  const random = getRandom(0, 2);
+  const random = getRandom(0, 3);
   switch (random) {
     case 0:
       return generateMathTask();
     case 1:
       return generateListeningTask();
+    case 2:
+      return generateTranslateTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < 2`);
   }
@@ -67,6 +82,8 @@ function validateSolution(task, solution) {
       return task.math.solution === parseInt(solution, 10);
     case 'listening':
       return task.listening.solution === solution;
+    case 'translate':
+      return task.translate.solutions.includes(solution);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -75,6 +92,7 @@ function validateSolution(task, solution) {
 export {
   generateMathTask,
   generateListeningTask,
+  generateTranslateTask,
   calculateSolution,
   validateSolution,
   generateTask,
