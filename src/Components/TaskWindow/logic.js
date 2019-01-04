@@ -74,6 +74,7 @@ function validateSolution(task, solution) {
 
 export {
   generateMathTask,
+  generateListeningTask,
   calculateSolution,
   validateSolution,
   generateTask,

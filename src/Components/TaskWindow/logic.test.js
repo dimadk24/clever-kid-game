@@ -1,4 +1,6 @@
-import { calculateSolution, generateMathTask, validateSolution } from './logic';
+import {
+  calculateSolution, generateListeningTask, generateMathTask, validateSolution,
+} from './logic';
 
 describe('generateMathTask', () => {
   it('should have right types', () => {
@@ -12,6 +14,17 @@ describe('generateMathTask', () => {
     expect(math.sign).toBeString();
     expect(math.sign).toBeOneOf(['+', '-']);
     expect(math.solution).toBeNumber();
+  });
+});
+
+describe('generateListeningTask', () => {
+  it('should have right types', () => {
+    const task = generateListeningTask();
+    expect(task.type).toBe('listening');
+    const { listening } = task;
+    expect(listening).toBeDefined();
+    expect(listening.name).toBeString();
+    expect(listening.solution).toBeString();
   });
 });
 
