@@ -1,4 +1,5 @@
 import dictionary from '../../../tasks_configs/translate/dictionary';
+import words from '../../../tasks_configs/listening/words';
 import { getRandom } from '../Helpers/utils';
 
 function getRandomSign() {
@@ -38,8 +39,7 @@ function generateMathTask() {
 }
 
 function generateListeningTask() {
-  const words = ['apple', 'car', 'cat', 'dog', 'hello', 'star', 'teacher', 'town'];
-  const random = getRandom(0, 7);
+  const random = getRandom(0, words.length);
   return {
     type: 'listening',
     listening: {
