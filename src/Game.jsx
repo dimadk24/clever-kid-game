@@ -33,6 +33,7 @@ class Game extends Component {
       animateBomb: false,
       animationPosition: '',
       animateHeal: false,
+      sounds: true,
     };
     this.onDead = (...args) => props.onDead(...args);
   }
@@ -128,6 +129,7 @@ class Game extends Component {
       animateBomb,
       animationPosition,
       animateHeal,
+      sounds,
     } = this.state;
     return (
       <div className="game">
@@ -136,7 +138,7 @@ class Game extends Component {
         <CharacterWindow health={monster.health} name={monster.name} position={RIGHT} />
         <Hero />
         <Monster />
-        <SettingsWindow onChangeSound={() => ({})} />
+        <SettingsWindow onChangeSound={soundsState => this.setState({ sounds: soundsState })} />
         {
           isUserTurn && (
             <SpellWindow
@@ -156,10 +158,10 @@ class Game extends Component {
           )
         }
         {
-          animateBomb && <Bomb position={animationPosition} />
+          animateBomb && <Bomb position={animationPosition} sounds={sounds} />
         }
         {
-          animateHeal && <Heal />
+          animateHeal && <Heal sounds={sounds} />
         }
       </div>
     );

@@ -8,9 +8,13 @@ import './Bomb.scss';
 
 const ANIMATION_DURATION = 2300;
 
-function Bomb({ position }) {
+function playSound() {
   const howlSound = new Howl({ src: sound });
   howlSound.play();
+}
+
+function Bomb({ position, sounds }) {
+  if (sounds) playSound();
   const classes = classNames('bomb', position);
   return (
     <img
@@ -24,6 +28,7 @@ function Bomb({ position }) {
 
 Bomb.propTypes = {
   position: PropTypes.oneOf(['left', 'right']).isRequired,
+  sounds: PropTypes.bool.isRequired,
 };
 
 export default Bomb;
