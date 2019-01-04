@@ -60,9 +60,9 @@ class TaskWindow extends Component {
     this.setState({ userSolution: e.target.value });
   }
 
-  respond(solution) {
-    const { userSolution } = this.state;
-    if (!userSolution) return;
+  respond() {
+    const { userSolution: solution } = this.state;
+    if (!solution) return;
     const right = validateSolution(this.task, solution);
     if (right) {
       this.setState({ answerType: SUCCESS });
@@ -74,7 +74,7 @@ class TaskWindow extends Component {
   }
 
   render() {
-    const { answerType, userSolution } = this.state;
+    const { answerType } = this.state;
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
     return (
@@ -85,7 +85,7 @@ class TaskWindow extends Component {
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            this.respond(userSolution);
+            this.respond();
           }}
         >
           <div className="task__window__question">
