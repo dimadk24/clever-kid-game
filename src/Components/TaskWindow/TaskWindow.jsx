@@ -57,7 +57,8 @@ class TaskWindow extends Component {
   }
 
   onInputChange(e) {
-    this.setState({ userSolution: e.target.value });
+    const userSolution = e.target.value.trim();
+    this.setState({ userSolution });
   }
 
   respond() {
@@ -74,7 +75,7 @@ class TaskWindow extends Component {
   }
 
   render() {
-    const { answerType } = this.state;
+    const { answerType, userSolution } = this.state;
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
     return (
@@ -97,6 +98,7 @@ class TaskWindow extends Component {
               type="text"
               onChange={e => this.onInputChange(e)}
               disabled={answered}
+              value={userSolution}
               autoFocus
             />
           </div>
