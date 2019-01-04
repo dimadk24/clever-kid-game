@@ -1,0 +1,36 @@
+@keyframes heal {
+  0% {
+    opacity: 0;
+  }
+
+  75% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.heal,
+.heal::before {
+  position: absolute;
+  top: 0;
+  animation-name: heal;
+}
+
+.heal {
+  left: 1%;
+  background-color: green;
+  width: 213px;
+  height: 85%;
+}
+
+
+.heal::before {
+  content: '';
+  left: 22%;
+  background-color: lightgreen;
+  width: 120px;
+  height: 100%;
+}

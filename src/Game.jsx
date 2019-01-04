@@ -9,6 +9,7 @@ import MonsterCounterWindow from './Components/MonsterCounterWindow/MonsterCount
 import SettingsWindow from './Components/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/SpellWindow/SpellWindow';
 import TaskWindow from './Components/TaskWindow/TaskWindow';
+import Heal, { ANIMATION_TIME as HEAL_ANIMATION_TIME } from './Components/Heal/Heal';
 
 const MAX_HEALTH = 100;
 const MIN_HEALTH = 0;
@@ -31,6 +32,7 @@ class Game extends Component {
       winCount: 0,
       animateBomb: false,
       animationPosition: '',
+      animateHeal: false,
     };
     this.onDead = (...args) => props.onDead(...args);
   }
@@ -62,10 +64,17 @@ class Game extends Component {
     this.setState({ animateBomb: false });
   }
 
+  async animateHeal() {
+    this.setState({ animateHeal: true });
+    await sleep(HEAL_ANIMATION_TIME);
+    this.setState({ animateHeal: false });
+  }
+
   async updateHeroHealth(value) {
     const { winCount } = this.state;
     let isDead = false;
     if (value < 0) await this.animateBomb('left');
+    else await this.animateHeal();
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.hero.health += value;
@@ -118,6 +127,7 @@ class Game extends Component {
       winCount,
       animateBomb,
       animationPosition,
+      animateHeal,
     } = this.state;
     return (
       <div className="game">
@@ -147,6 +157,9 @@ class Game extends Component {
         }
         {
           animateBomb && <Bomb position={animationPosition} />
+        }
+        {
+          animateHeal && <Heal />
         }
       </div>
     );
