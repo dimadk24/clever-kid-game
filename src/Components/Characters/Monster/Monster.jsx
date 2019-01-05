@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import '../Character.scss';
 import './Monster.scss';
-import { clearCanvas, getDrawImageFunctionWithContext, loadImages } from '../../Helpers/canvas';
+import {
+  breath,
+  BREATH_MIN,
+  BREATH_UP,
+  clearCanvas,
+  getDrawImageFunctionWithContext,
+  loadImages,
+} from '../../Helpers/canvas';
 import { getRandom } from '../../Helpers/utils';
 
 function getRandomId() {
@@ -28,9 +35,9 @@ async function getImages() {
   ];
 }
 
-function drawMonster(loadedImages, drawImage) {
-  drawImage(loadedImages.arms, 0, 40, 200, 100);
-  drawImage(loadedImages.head, 35, 0, 130, 110);
+function drawMonster(loadedImages, drawImage, breathState) {
+  drawImage(loadedImages.arms, 0, 35 + 15 * breathState, 200, 100);
+  drawImage(loadedImages.head, 35, 15 * breathState, 130, 110);
   drawImage(loadedImages.body, 0, 108, 200, 150);
 }
 
@@ -40,10 +47,14 @@ class Monster extends Component {
     const loadedImages = await loadImages(images);
     const context = document.getElementById('monsterCanvas').getContext('2d');
     const drawImage = getDrawImageFunctionWithContext(context);
+    let breathDirection = BREATH_UP;
+    let breathState = BREATH_MIN;
 
     function draw() {
+      ({ breathState, breathDirection } = breath({ breathState, breathDirection }));
       clearCanvas(context);
-      drawMonster(loadedImages, drawImage);
+      drawMonster(loadedImages, drawImage, breathState);
+      requestAnimationFrame(draw);
     }
 
     draw();
