@@ -39,4 +39,29 @@ function clearCanvas(context) {
   context.clearRect(0, 0, context.canvas.width, context.canvas.height);
 }
 
-export { getDrawImageFunctionWithContext, clearCanvas, loadImages };
+const BREATH_UP = 0;
+const BREATH_DOWN = 1;
+const BREATH_MIN = 0;
+const BREATH_MAX = 1;
+const BREATH_INC = 0.01;
+
+function breath({ breathDirection, breathState }) {
+  const response = { breathState, breathDirection };
+  if (breathDirection === BREATH_UP) {
+    response.breathState += BREATH_INC;
+    if (breathState >= BREATH_MAX) response.breathDirection = BREATH_DOWN;
+  } else {
+    response.breathState -= BREATH_INC;
+    if (breathState <= BREATH_MIN) response.breathDirection = BREATH_UP;
+  }
+  return response;
+}
+
+export {
+  getDrawImageFunctionWithContext,
+  clearCanvas,
+  loadImages,
+  breath,
+  BREATH_UP,
+  BREATH_MIN,
+};

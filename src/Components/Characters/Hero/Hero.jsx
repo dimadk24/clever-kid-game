@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { clearCanvas, getDrawImageFunctionWithContext, loadImages } from '../../Helpers/canvas';
+import {
+  breath,
+  BREATH_MIN,
+  BREATH_UP,
+  clearCanvas,
+  getDrawImageFunctionWithContext,
+  loadImages,
+} from '../../Helpers/canvas';
 import '../Character.scss';
 import './Hero.scss';
 import body from './images/body.png';
@@ -23,27 +30,30 @@ const images = [
   { name: 'spear', src: spear },
 ];
 
-function drawHero(loadedImages, drawImage) {
-  drawImage(loadedImages.leftArm, 105, 90, 80, 110);
-  drawImage(loadedImages.spear, 320, 150, 30, 200, 80);
+function drawHero(loadedImages, drawImage, breathState) {
+  drawImage(loadedImages.leftArm, 105, 85 + 10 * breathState, 80, 110);
+  drawImage(loadedImages.spear, 310, 145 + 10 * breathState, 30, 200, 80);
   drawImage(loadedImages.leftLeg, 80, 150, 80, 80);
-  drawImage(loadedImages.body, 0, 40, 150, 150);
+  drawImage(loadedImages.body, 0, 35 + 10 * breathState, 150, 150);
   drawImage(loadedImages.rightLeg, 45, 150, 80, 80);
-  drawImage(loadedImages.rightArm, 70, 90, 80, 80, 80);
-  drawImage(loadedImages.head, 40, 0, 110, 110);
-  drawImage(loadedImages.shield, 10, 120, 90, 90);
+  drawImage(loadedImages.rightArm, 80, 85 + 10 * breathState, 80, 80, 80);
+  drawImage(loadedImages.head, 45, 10 * breathState, 110, 110);
+  drawImage(loadedImages.shield, 15, 115 + 10 * breathState, 90, 90);
 }
-
 
 class Hero extends Component {
   async componentDidMount() {
     const loadedImages = await loadImages(images);
     const context = document.getElementById('heroCanvas').getContext('2d');
     const drawImage = getDrawImageFunctionWithContext(context);
+    let breathDirection = BREATH_UP;
+    let breathState = BREATH_MIN;
 
     function draw() {
+      ({ breathState, breathDirection } = breath({ breathState, breathDirection }));
       clearCanvas(context);
-      drawHero(loadedImages, drawImage);
+      drawHero(loadedImages, drawImage, breathState);
+      requestAnimationFrame(draw);
     }
 
     draw();
