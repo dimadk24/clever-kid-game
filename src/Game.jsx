@@ -4,7 +4,7 @@ import Bomb, { ANIMATION_DURATION as BOMB_ANIMATION_TIME } from './Components/An
 import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
 import CharacterWindow, { LEFT, RIGHT } from './Components/Windows/CharacterWindow/CharacterWindow';
-import { sleep } from './Components/Helpers/utils';
+import { generateMonsterName, sleep } from './Components/Helpers/utils';
 import MonsterCounterWindow from './Components/Windows/MonsterCounterWindow/MonsterCounterWindow';
 import SettingsWindow from './Components/Windows/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/Windows/SpellWindow/SpellWindow';
@@ -27,7 +27,7 @@ class Game extends Component {
       },
       monster: {
         health: MAX_HEALTH,
-        name: 'Robot',
+        name: generateMonsterName(),
       },
       winCount: 0,
       animateBomb: false,
