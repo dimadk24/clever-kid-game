@@ -23,11 +23,7 @@ class App extends Component {
     return (
       <div className="app">
         {
-          !username && (
-            <LoginWindow
-              onLogIn={name => this.setState({ username: name })}
-            />
-          )
+          !username && <LoginWindow onLogIn={name => this.setState({ username: name })} />
         }
         {
           username && heroAlive
