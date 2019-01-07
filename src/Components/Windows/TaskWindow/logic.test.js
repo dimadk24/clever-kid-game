@@ -1,7 +1,7 @@
 import {
   calculateSolution,
   generateImageTask,
-  generateListeningTask,
+  generateListeningTask, generateLogoTask,
   generateMathTask,
   generateTranslateTask,
   validateSolution,
@@ -54,6 +54,16 @@ describe('generateImageTask', () => {
     expect(image.name).toBeString();
     expect(image.solutions).toBeArray();
     expect(image.solutions[0]).toBeString();
+  });
+});
+
+describe('generateLogoTask', () => {
+  it('should have right types', () => {
+    const task = generateLogoTask();
+    expect(task.type).toBe('logo');
+    const { logo } = task;
+    expect(logo).toBeDefined();
+    expect(logo.name).toBeString();
   });
 });
 
@@ -186,5 +196,25 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'mouse')).toBeFalsy();
+  });
+
+  it('should validate logo task as true', () => {
+    const task = {
+      type: 'logo',
+      logo: {
+        name: 'bmw',
+      },
+    };
+    expect(validateSolution(task, 'bmw')).toBeTruthy();
+  });
+
+  it('should validate logo task as false', () => {
+    const task = {
+      type: 'logo',
+      logo: {
+        name: 'logo',
+      },
+    };
+    expect(validateSolution(task, 'apple')).toBeFalsy();
   });
 });
