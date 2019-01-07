@@ -84,6 +84,7 @@ describe('generateCapitalTask', () => {
     const task = generateCapitalTask();
     expect(task.type).toBe('capital');
     const { capital } = task;
+    expect(capital).toBeDefined();
     expect(capital.country).toBeString();
     expect(capital.solution).toBeString();
   });
@@ -94,6 +95,7 @@ describe('generateCountryTask', () => {
     const task = generateCountryTask();
     expect(task.type).toBe('country');
     const { country } = task;
+    expect(country).toBeDefined();
     expect(country.capital).toBeString();
     expect(country.solution).toBeString();
   });
