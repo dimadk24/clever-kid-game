@@ -3,14 +3,19 @@ import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import MathQuestion from './MathQuestion/MathQuestion';
 import TranslateQuestion from './TranslateQuestion/TranslateQuestion';
 
-function mapTaskToQuestion(task) {
+function mapTaskToQuestion(task, baseOptions) {
+  const props = { ...baseOptions };
   switch (task.type) {
     case 'math':
-      return <MathQuestion sign={task.math.sign} operands={task.math.operands} />;
+      props.sign = task.math.sign;
+      props.operands = task.math.operands;
+      return <MathQuestion {...props} />;
     case 'listening':
-      return <ListeningQuestion name={task.listening.name} />;
+      props.name = task.listening.name;
+      return <ListeningQuestion {...props} />;
     case 'translate':
-      return <TranslateQuestion word={task.translate.word} />;
+      props.word = task.translate.word;
+      return <TranslateQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

@@ -28,7 +28,6 @@ class TaskWindow extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userSolution: '',
       answerType: NOT_ANSWERED,
     };
     this.onFail = () => {
@@ -56,13 +55,7 @@ class TaskWindow extends Component {
     if (code === ESCAPE) this.onClose();
   }
 
-  onInputChange(e) {
-    const userSolution = e.target.value.trim();
-    this.setState({ userSolution });
-  }
-
-  respond() {
-    const { userSolution: solution } = this.state;
+  respond(solution) {
     if (!solution) return;
     const right = validateSolution(this.task, solution);
     if (right) {
@@ -75,7 +68,7 @@ class TaskWindow extends Component {
   }
 
   render() {
-    const { answerType, userSolution } = this.state;
+    const { answerType } = this.state;
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
     return (
@@ -83,29 +76,12 @@ class TaskWindow extends Component {
         <Button onClick={this.onClose} className="task__window__close">
           <i className="icon-close" />
         </Button>
-        <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            this.respond();
-          }}
-        >
-          <div className="task__window__question">
-            {
-              mapTaskToQuestion(this.task)
-            }
-            <input
-              className="task__window__input"
-              type="text"
-              onChange={e => this.onInputChange(e)}
-              disabled={answered}
-              value={userSolution}
-              autoFocus
-            />
-          </div>
-          <Button className="task__window__send" type="submit">
-              Send
-          </Button>
-        </form>
+        {
+          mapTaskToQuestion(this.task, {
+            onSubmit: solution => this.respond(solution),
+            answered,
+          })
+        }
       </div>
     );
   }

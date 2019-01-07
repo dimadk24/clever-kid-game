@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Button from '../../Helpers/Button/Button';
 import Loader from '../../Helpers/Loader/Loader';
-import './ListeningQuestion.scss';
+import QuestionWithTextAnswer from '../BaseQuestions/QuestionWithTextAnswer/QuestionWithTextAnswer';
 
 class ListeningQuestion extends Component {
   constructor(props) {
@@ -41,23 +41,18 @@ class ListeningQuestion extends Component {
 
   render() {
     const { sound, loaded } = this.state;
+    let question;
+    if (loaded) {
+      question = (
+        <Button onClick={() => sound.play()} className="question__button">
+          Play
+        </Button>
+      );
+    } else question = <Loader size="s" />;
+    const hint = 'Write a word, that is being pronounced:';
+    const { ...baseComponentProps } = this.props;
     return (
-      <div className="question">
-        <p className="question__hint">Write a word, that is being pronounced:</p>
-        {
-          loaded && (
-            <Button
-              onClick={() => sound.play()}
-              className="question__button"
-            >
-              Play
-            </Button>
-          )
-        }
-        {
-          !loaded && <Loader size="s" />
-        }
-      </div>
+      <QuestionWithTextAnswer hint={hint} question={question} {...baseComponentProps} />
     );
   }
 }

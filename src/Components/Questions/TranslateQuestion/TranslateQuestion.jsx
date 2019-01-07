@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './TranslateQuestion.scss';
+import QuestionWithTextAnswer from '../BaseQuestions/QuestionWithTextAnswer/QuestionWithTextAnswer';
 
 
-function TranslateQuestion({ word }) {
+function TranslateQuestion({ word, ...baseComponentProps }) {
   return (
-    <div className="question">
-      <p>Translate to Russian:</p>
-      <p className="question__word">{word}</p>
-    </div>
+    <QuestionWithTextAnswer
+      hint="Translate to Russian:"
+      question={word}
+      {...baseComponentProps}
+    />
   );
 }
 

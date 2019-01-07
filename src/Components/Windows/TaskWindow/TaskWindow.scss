@@ -6,12 +6,6 @@
   background-color: white;
   padding: 10px 20px;
   border-radius: 15px;
-
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 }
 
 .task__window.success,
@@ -39,22 +33,4 @@
 .task__window__close:active {
   color: #be0a0a;
   background-color: white;
-}
-
-.task__window__send {
-  width: 50%;
-  margin: 15px 0 5px;
-}
-
-.task__window__question {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .task__window__input {
-    border: 1px solid black;
-    padding: 3px 5px;
-    max-width: 70%;
-    width: 150px;
-  }
 }
