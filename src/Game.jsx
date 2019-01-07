@@ -34,6 +34,7 @@ class Game extends Component {
       animationPosition: '',
       animateHeal: false,
       sounds: true,
+      animatingHealthBar: false,
     };
     this.onDead = (...args) => props.onDead(...args);
   }
@@ -79,6 +80,7 @@ class Game extends Component {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.hero.health += value;
+      newState.animatingHealthBar = true;
       if (newState.hero.health > MAX_HEALTH) {
         newState.hero.health = MAX_HEALTH;
       } else if (newState.hero.health < MIN_HEALTH) {
@@ -88,6 +90,7 @@ class Game extends Component {
       return newState;
     });
     await sleep(HEALTH_BAR_ANIMATION_TIME);
+    this.setState({ animatingHealthBar: false });
     if (isDead) this.onDead(winCount);
   }
 
@@ -97,6 +100,7 @@ class Game extends Component {
     this.setState((prevState) => {
       const newState = { ...prevState };
       newState.monster.health += value;
+      newState.animatingHealthBar = true;
       if (newState.monster.health < MIN_HEALTH) {
         newState.monster.health = MIN_HEALTH;
       }
@@ -109,6 +113,7 @@ class Game extends Component {
       return newState;
     });
     await sleep(HEALTH_BAR_ANIMATION_TIME);
+    this.setState({ animatingHealthBar: false });
     return shouldMonsterAttack;
   }
 
@@ -129,8 +134,10 @@ class Game extends Component {
       animateBomb,
       animationPosition,
       animateHeal,
+      animatingHealthBar,
       sounds,
     } = this.state;
+    const animating = animateBomb || animateHeal || animatingHealthBar;
     return (
       <div className="game">
         <CharacterWindow health={hero.health} name={hero.name} position={LEFT} />
@@ -140,7 +147,7 @@ class Game extends Component {
         <Monster />
         <SettingsWindow onChangeSound={soundsState => this.setState({ sounds: soundsState })} />
         {
-          isUserTurn && !showingTask && (
+          isUserTurn && !showingTask && !animating && (
             <SpellWindow
               onHeal={() => this.showTask({ type: 'heal' })}
               onAttack={() => this.showTask({ type: 'attack' })}
