@@ -100,7 +100,8 @@ function generateCapitalTask() {
 }
 
 function generateTask() {
-  const random = getRandom(0, 6);
+  const taskTypesCount = 7;
+  const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
       return generateMathTask();
@@ -115,7 +116,7 @@ function generateTask() {
     case 5:
       return generateCapitalTask();
     default:
-      throw new Error(`Bad random: ${random}. Expected it to be >=0 and < 2`);
+      throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
 }
 
