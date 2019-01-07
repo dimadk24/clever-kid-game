@@ -104,7 +104,8 @@ function generateTask() {
   }
 }
 
-function validateSolution(task, solution) {
+function validateSolution(task, rawSolution) {
+  const solution = rawSolution.toLowerCase();
   const { type } = task;
   switch (type) {
     case 'math':
