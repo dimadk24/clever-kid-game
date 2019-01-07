@@ -1,0 +1,22 @@
+[
+  {
+    "question": "HTML means Hyper Text Markup Language",
+    "right": true
+  },
+  {
+    "question": "ReactJS was build at Google",
+    "right": false
+  },
+  {
+    "question": "Original iPod was presented at 2001",
+    "right": true
+  },
+  {
+    "question": "Clever Kid Game is awesome software",
+    "right": true
+  },
+  {
+    "question": "Typical February includes 29 days",
+    "right": false
+  }
+]

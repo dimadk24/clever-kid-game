@@ -4,6 +4,7 @@ import words from '../../../../tasks_configs/listening/words';
 import images from '../../../../tasks_configs/image/images';
 import logos from '../../../../tasks_configs/logo/logos';
 import countries from '../../../../tasks_configs/capital/countries';
+import trueFalseQuestions from '../../../../tasks_configs/true_false/questions';
 import { getRandom } from '../../Helpers/utils';
 
 function getRandomSign() {
@@ -117,8 +118,20 @@ function generateCountryTask() {
   };
 }
 
+function generateTrueFalseTask() {
+  const random = getRandom(0, trueFalseQuestions.length);
+  const item = trueFalseQuestions[random];
+  return {
+    type: 'trueFalse',
+    trueFalse: {
+      question: item.question,
+      solution: String(item.right),
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 8;
+  const taskTypesCount = 9;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -137,6 +150,8 @@ function generateTask() {
       return generateCountryTask();
     case 7:
       return generateTranslateTask('toEng');
+    case 8:
+      return generateTrueFalseTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -160,6 +175,8 @@ function validateSolution(task, rawSolution) {
       return task.capital.solution.toLowerCase() === solution;
     case 'country':
       return task.country.solution.toLowerCase() === solution;
+    case 'trueFalse':
+      return task.trueFalse.solution === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -173,6 +190,7 @@ export {
   generateLogoTask,
   generateCapitalTask,
   generateCountryTask,
+  generateTrueFalseTask,
   calculateSolution,
   validateSolution,
   generateTask,

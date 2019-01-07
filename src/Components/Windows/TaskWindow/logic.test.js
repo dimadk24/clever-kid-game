@@ -3,7 +3,7 @@ import {
   generateImageTask,
   generateListeningTask, generateLogoTask,
   generateMathTask,
-  generateTranslateTask,
+  generateTranslateTask, generateTrueFalseTask,
   validateSolution,
 } from './logic';
 
@@ -98,6 +98,17 @@ describe('generateCountryTask', () => {
     expect(country).toBeDefined();
     expect(country.capital).toBeString();
     expect(country.solution).toBeString();
+  });
+});
+
+describe('generateTrueFalseTask', () => {
+  it('should have right types', () => {
+    const task = generateTrueFalseTask();
+    expect(task.type).toBe('trueFalse');
+    const { trueFalse } = task;
+    expect(trueFalse).toBeDefined();
+    expect(trueFalse.question).toBeString();
+    expect(trueFalse.solution).toBeString();
   });
 });
 
@@ -296,5 +307,27 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'russia')).toBeFalsy();
+  });
+
+  it('should validate trueFalse task as true', () => {
+    const task = {
+      type: 'trueFalse',
+      trueFalse: {
+        question: 'it is true',
+        solution: 'true',
+      },
+    };
+    expect(validateSolution(task, 'true')).toBeTruthy();
+  });
+
+  it('should validate trueFalse task as false', () => {
+    const task = {
+      type: 'trueFalse',
+      trueFalse: {
+        question: 'it is true',
+        solution: 'true',
+      },
+    };
+    expect(validateSolution(task, 'false')).toBeFalsy();
   });
 });

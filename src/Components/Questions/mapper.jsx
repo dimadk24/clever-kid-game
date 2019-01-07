@@ -6,6 +6,7 @@ import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import LogoQuestion from './LogoQuestion/LogoQuestion';
 import MathQuestion from './MathQuestion/MathQuestion';
 import TranslateQuestion from './TranslateQuestion/TranslateQuestion';
+import TrueFalseQuestion from './TrueFalseQuestion/TrueFalseQuestion';
 
 function mapTaskToQuestion(task, baseOptions) {
   const props = { ...baseOptions };
@@ -33,6 +34,9 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'country':
       props.capital = task.country.capital;
       return <CountryQuestion {...props} />;
+    case 'trueFalse':
+      props.question = task.trueFalse.question;
+      return <TrueFalseQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }
