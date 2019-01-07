@@ -34,11 +34,23 @@ describe('generateListeningTask', () => {
 });
 
 describe('generateTranslateTask', () => {
-  it('should have right types', () => {
-    const task = generateTranslateTask();
+  it('should have right types with toEng lang', () => {
+    const task = generateTranslateTask('toEng');
     expect(task.type).toBe('translate');
     const { translate } = task;
     expect(translate).toBeDefined();
+    expect(translate.toLang).toBe('toEng');
+    expect(translate.word).toBeString();
+    expect(translate.solutions).toBeArray();
+    expect(translate.solutions[0]).toBeString();
+  });
+
+  it('should have right types with toRus lang', () => {
+    const task = generateTranslateTask('toRus');
+    expect(task.type).toBe('translate');
+    const { translate } = task;
+    expect(translate).toBeDefined();
+    expect(translate.toLang).toBe('toRus');
     expect(translate.word).toBeString();
     expect(translate.solutions).toBeArray();
     expect(translate.solutions[0]).toBeString();
@@ -177,6 +189,7 @@ describe('validateSolution', () => {
     const task = {
       type: 'translate',
       translate: {
+        toLang: 'toRus',
         word: 'mouse',
         solutions: ['мышь', 'мышка'],
       },
@@ -189,6 +202,7 @@ describe('validateSolution', () => {
     const task = {
       type: 'translate',
       translate: {
+        toLang: 'toRus',
         word: 'mouse',
         solutions: ['мышь', 'мышка'],
       },

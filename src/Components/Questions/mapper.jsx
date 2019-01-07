@@ -19,6 +19,7 @@ function mapTaskToQuestion(task, baseOptions) {
       return <ListeningQuestion {...props} />;
     case 'translate':
       props.word = task.translate.word;
+      props.toLang = task.translate.toLang;
       return <TranslateQuestion {...props} />;
     case 'image':
       props.name = task.image.name;

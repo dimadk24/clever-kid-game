@@ -1,4 +1,5 @@
-import dictionary from '../../../../tasks_configs/translate/dictionary';
+import engToRusDictionary from '../../../../tasks_configs/translate/engToRusDictionary';
+import rusToEngDictionary from '../../../../tasks_configs/translate/rusToEngDictionary';
 import words from '../../../../tasks_configs/listening/words';
 import images from '../../../../tasks_configs/image/images';
 import logos from '../../../../tasks_configs/logo/logos';
@@ -52,12 +53,17 @@ function generateListeningTask() {
   };
 }
 
-function generateTranslateTask() {
+function generateTranslateTask(toLang) {
+  let dictionary;
+  if (toLang === 'toRus') dictionary = engToRusDictionary;
+  else if (toLang === 'toEng') dictionary = rusToEngDictionary;
+  else throw new Error(`wrong lang passed: ${toLang}. Expected one of: "toRus", "toEng"`);
   const randomInt = getRandom(0, dictionary.length);
   const item = dictionary[randomInt];
   return {
     type: 'translate',
     translate: {
+      toLang,
       word: item.word,
       solutions: item.translations,
     },
@@ -112,7 +118,7 @@ function generateCountryTask() {
 }
 
 function generateTask() {
-  const taskTypesCount = 7;
+  const taskTypesCount = 8;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -120,7 +126,7 @@ function generateTask() {
     case 1:
       return generateListeningTask();
     case 2:
-      return generateTranslateTask();
+      return generateTranslateTask('toRus');
     case 3:
       return generateImageTask();
     case 4:
@@ -129,6 +135,8 @@ function generateTask() {
       return generateCapitalTask();
     case 6:
       return generateCountryTask();
+    case 7:
+      return generateTranslateTask('toEng');
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
