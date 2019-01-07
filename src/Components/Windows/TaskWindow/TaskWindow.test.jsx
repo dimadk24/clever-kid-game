@@ -1,34 +1,7 @@
-import { shallow } from 'enzyme';
-import React from 'react';
-import TaskWindow, {
+import {
   generateWindowClassName,
   INITIAL_WINDOW_CLASS_NAME, NOT_ANSWERED, SUCCESS, FAIL,
 } from './TaskWindow';
-
-describe('TaskWindow', () => {
-  const emptyFunction = () => ({});
-  const task = {
-    type: 'math',
-    math: {
-      operands: [1, 2],
-      sign: '+',
-      solution: 3,
-    },
-  };
-
-  it('should render form with input', () => {
-    const wrapper = shallow(
-      <TaskWindow
-        onSuccess={emptyFunction}
-        onFail={emptyFunction}
-        onClose={emptyFunction}
-        task={task}
-      />,
-    );
-    expect(wrapper).toContainMatchingElement('form');
-    expect(wrapper).toContainMatchingElement('input');
-  });
-});
 
 describe('generateWindowClassName', () => {
   it('should return initial class if type is not answered', () => {
