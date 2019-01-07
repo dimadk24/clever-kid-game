@@ -33,8 +33,8 @@ class ListeningQuestion extends Component {
   }
 
   onKeyDown({ code }) {
-    if (code === 'Space') {
-      const { sound } = this.state;
+    const { sound, loaded } = this.state;
+    if (code === 'Space' && loaded) {
       sound.play();
     }
   }
