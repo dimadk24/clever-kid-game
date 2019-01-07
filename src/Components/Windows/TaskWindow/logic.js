@@ -99,6 +99,18 @@ function generateCapitalTask() {
   };
 }
 
+function generateCountryTask() {
+  const random = getRandom(0, countries.length);
+  const item = countries[random];
+  return {
+    type: 'country',
+    country: {
+      capital: item.capital,
+      solution: item.country,
+    },
+  };
+}
+
 function generateTask() {
   const taskTypesCount = 7;
   const random = getRandom(0, taskTypesCount);
@@ -115,6 +127,8 @@ function generateTask() {
       return generateLogoTask();
     case 5:
       return generateCapitalTask();
+    case 6:
+      return generateCountryTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -136,6 +150,8 @@ function validateSolution(task, rawSolution) {
       return task.logo.name === solution;
     case 'capital':
       return task.capital.solution.toLowerCase() === solution;
+    case 'country':
+      return task.country.solution.toLowerCase() === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -148,6 +164,7 @@ export {
   generateImageTask,
   generateLogoTask,
   generateCapitalTask,
+  generateCountryTask,
   calculateSolution,
   validateSolution,
   generateTask,
