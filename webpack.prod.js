@@ -10,7 +10,9 @@ const config = merge(commonConfig, {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './public/game.html',
+      filename: 'game.html',
+      excludeChunks: ['index'],
       minify: {
         removeComments: true,
         collapseWhitespace: true,

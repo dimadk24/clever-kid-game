@@ -2,7 +2,8 @@ const path = require('path');
 
 module.exports = {
   entry: {
-    index: './src/index.jsx',
+    index: './public/index.html',
+    game: './src/index.jsx',
   },
   resolve: {
     extensions: ['.js', '.jsx', '.json'],
@@ -12,6 +13,29 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /index\.html$/,
+        use: [
+          'file-loader?name=[name].[ext]',
+          'extract-loader',
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+              removeComments: true,
+              collapseWhitespace: true,
+              removeRedundantAttributes: true,
+              useShortDoctype: true,
+              removeEmptyAttributes: true,
+              removeStyleLinkTypeAttributes: true,
+              keepClosingSlash: true,
+              minifyJS: true,
+              minifyCSS: true,
+              minifyURLs: true,
+            },
+          },
+        ],
+      },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,

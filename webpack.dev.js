@@ -17,7 +17,9 @@ const config = merge(commonConfig, {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './public/index.html',
+      template: './public/game.html',
+      filename: 'game.html',
+      excludeChunks: ['index'],
     }),
     new ErrorOverlayPlugin(),
     new webpack.HotModuleReplacementPlugin(),
