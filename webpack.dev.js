@@ -22,9 +22,6 @@ const config = merge(commonConfig, {
     new ErrorOverlayPlugin(),
     new webpack.HotModuleReplacementPlugin(),
   ],
-  output: {
-    filename: '[name].chunk.js',
-  },
 });
 
 module.exports = config;
