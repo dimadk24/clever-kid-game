@@ -1,5 +1,6 @@
 import {
   calculateSolution,
+  generateImageTask,
   generateListeningTask,
   generateMathTask,
   generateTranslateTask,
@@ -41,6 +42,18 @@ describe('generateTranslateTask', () => {
     expect(translate.word).toBeString();
     expect(translate.solutions).toBeArray();
     expect(translate.solutions[0]).toBeString();
+  });
+});
+
+describe('generateImageTask', () => {
+  it('should have right types', () => {
+    const task = generateImageTask();
+    expect(task.type).toBe('image');
+    const { image } = task;
+    expect(image).toBeDefined();
+    expect(image.name).toBeString();
+    expect(image.solutions).toBeArray();
+    expect(image.solutions[0]).toBeString();
   });
 });
 
@@ -151,5 +164,27 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'дом')).toBeFalsy();
+  });
+
+  it('should validate image task as true', () => {
+    const task = {
+      type: 'image',
+      image: {
+        name: 'car',
+        solutions: ['car', 'auto'],
+      },
+    };
+    expect(validateSolution(task, 'car')).toBeTruthy();
+  });
+
+  it('should validate image task as false', () => {
+    const task = {
+      type: 'image',
+      image: {
+        name: 'car',
+        solutions: ['car', 'auto'],
+      },
+    };
+    expect(validateSolution(task, 'mouse')).toBeFalsy();
   });
 });

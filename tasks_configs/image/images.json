@@ -1,0 +1,25 @@
+[
+  {
+    "name": "car",
+    "solutions": [
+      "car",
+      "automobile",
+      "machine",
+      "auto"
+    ]
+  },
+  {
+    "name": "mouse",
+    "solutions": [
+      "mouse"
+    ]
+  },
+  {
+    "name": "plane",
+    "solutions": [
+      "plane",
+      "biplane",
+      "airbus"
+    ]
+  }
+]

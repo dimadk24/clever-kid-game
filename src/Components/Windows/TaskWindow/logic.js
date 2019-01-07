@@ -1,5 +1,6 @@
 import dictionary from '../../../../tasks_configs/translate/dictionary';
 import words from '../../../../tasks_configs/listening/words';
+import images from '../../../../tasks_configs/image/images';
 import { getRandom } from '../../Helpers/utils';
 
 function getRandomSign() {
@@ -61,8 +62,20 @@ function generateTranslateTask() {
   };
 }
 
+function generateImageTask() {
+  const randomInt = getRandom(0, images.length);
+  const item = images[randomInt];
+  return {
+    type: 'image',
+    image: {
+      name: item.name,
+      solutions: item.solutions,
+    },
+  };
+}
+
 function generateTask() {
-  const random = getRandom(0, 3);
+  const random = getRandom(0, 4);
   switch (random) {
     case 0:
       return generateMathTask();
@@ -70,6 +83,8 @@ function generateTask() {
       return generateListeningTask();
     case 2:
       return generateTranslateTask();
+    case 3:
+      return generateImageTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < 2`);
   }
@@ -84,6 +99,8 @@ function validateSolution(task, solution) {
       return task.listening.solution === solution;
     case 'translate':
       return task.translate.solutions.includes(solution);
+    case 'image':
+      return task.image.solutions.includes(solution);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -93,6 +110,7 @@ export {
   generateMathTask,
   generateListeningTask,
   generateTranslateTask,
+  generateImageTask,
   calculateSolution,
   validateSolution,
   generateTask,

@@ -1,4 +1,5 @@
 import React from 'react';
+import ImageQuestion from './ImageQuestion/ImageQuestion';
 import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import MathQuestion from './MathQuestion/MathQuestion';
 import TranslateQuestion from './TranslateQuestion/TranslateQuestion';
@@ -16,6 +17,9 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'translate':
       props.word = task.translate.word;
       return <TranslateQuestion {...props} />;
+    case 'image':
+      props.name = task.image.name;
+      return <ImageQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }
