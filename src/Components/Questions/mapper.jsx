@@ -1,6 +1,7 @@
 import React from 'react';
 import CapitalQuestion from './CapitalQuestion/CapitalQuestion';
 import CountryQuestion from './CountryQuestion/CountryQuestion';
+import GreaterLessOrEqualQuestion from './GreaterLessOrEqualQuestion/GreaterLessOrEqualQuestion';
 import ImageQuestion from './ImageQuestion/ImageQuestion';
 import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import LogoQuestion from './LogoQuestion/LogoQuestion';
@@ -37,6 +38,9 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'trueFalse':
       props.question = task.trueFalse.question;
       return <TrueFalseQuestion {...props} />;
+    case 'greaterLessOrEqual':
+      props.operands = task.greaterLessOrEqual.operands;
+      return <GreaterLessOrEqualQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

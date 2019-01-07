@@ -1,9 +1,9 @@
 import {
-  calculateSolution, generateCapitalTask, generateCountryTask,
+  calculateSolution, generateCapitalTask, generateCountryTask, generateGreaterLessOrEqualTask,
   generateImageTask,
   generateListeningTask, generateLogoTask,
   generateMathTask,
-  generateTranslateTask, generateTrueFalseTask,
+  generateTranslateTask, generateTrueFalseTask, getGreaterLessOrEqualSolution,
   validateSolution,
 } from './logic';
 
@@ -109,6 +109,32 @@ describe('generateTrueFalseTask', () => {
     expect(trueFalse).toBeDefined();
     expect(trueFalse.question).toBeString();
     expect(trueFalse.solution).toBeString();
+  });
+});
+
+describe('generateGreaterLessOrEqualTask', () => {
+  it('should have right types', () => {
+    const task = generateGreaterLessOrEqualTask();
+    expect(task.type).toBe('greaterLessOrEqual');
+    const { greaterLessOrEqual } = task;
+    expect(greaterLessOrEqual).toBeDefined();
+    expect(greaterLessOrEqual.operands).toBeArray();
+    expect(greaterLessOrEqual.operands[0]).toBeNumber();
+    expect(greaterLessOrEqual.solution).toBeString();
+  });
+});
+
+describe('getGreaterLessOrEqualSolution', () => {
+  it('should find greater solution', () => {
+    expect(getGreaterLessOrEqualSolution(15, 10)).toBe('>');
+  });
+
+  it('should find less solution', () => {
+    expect(getGreaterLessOrEqualSolution(10, 15)).toBe('<');
+  });
+
+  it('should find equal solution', () => {
+    expect(getGreaterLessOrEqualSolution(10, 10)).toBe('=');
   });
 });
 
@@ -329,5 +355,27 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'false')).toBeFalsy();
+  });
+
+  it('should validate greaterLessOrEqual task as true', () => {
+    const task = {
+      type: 'greaterLessOrEqual',
+      greaterLessOrEqual: {
+        operands: [10, 15],
+        solution: '<',
+      },
+    };
+    expect(validateSolution(task, '<')).toBeTruthy();
+  });
+
+  it('should validate greaterLessOrEqual task as false', () => {
+    const task = {
+      type: 'greaterLessOrEqual',
+      greaterLessOrEqual: {
+        operands: [10, 15],
+        solution: '<',
+      },
+    };
+    expect(validateSolution(task, '>')).toBeFalsy();
   });
 });

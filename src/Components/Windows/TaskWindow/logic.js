@@ -130,8 +130,29 @@ function generateTrueFalseTask() {
   };
 }
 
+function getGreaterLessOrEqualSolution(left, right) {
+  if (left < right) return '<';
+  if (left > right) return '>';
+  return '=';
+}
+
+function generateGreaterLessOrEqualTask() {
+  const operands = [
+    getRandom(10, 100),
+    getRandom(10, 100),
+  ];
+  const solution = getGreaterLessOrEqualSolution(...operands);
+  return {
+    type: 'greaterLessOrEqual',
+    greaterLessOrEqual: {
+      operands,
+      solution,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 9;
+  const taskTypesCount = 10;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -152,6 +173,8 @@ function generateTask() {
       return generateTranslateTask('toEng');
     case 8:
       return generateTrueFalseTask();
+    case 9:
+      return generateGreaterLessOrEqualTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -177,6 +200,8 @@ function validateSolution(task, rawSolution) {
       return task.country.solution.toLowerCase() === solution;
     case 'trueFalse':
       return task.trueFalse.solution === solution;
+    case 'greaterLessOrEqual':
+      return task.greaterLessOrEqual.solution === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -191,6 +216,8 @@ export {
   generateCapitalTask,
   generateCountryTask,
   generateTrueFalseTask,
+  generateGreaterLessOrEqualTask,
+  getGreaterLessOrEqualSolution,
   calculateSolution,
   validateSolution,
   generateTask,
