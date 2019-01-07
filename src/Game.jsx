@@ -140,7 +140,7 @@ class Game extends Component {
         <Monster />
         <SettingsWindow onChangeSound={soundsState => this.setState({ sounds: soundsState })} />
         {
-          isUserTurn && (
+          isUserTurn && !showingTask && (
             <SpellWindow
               onHeal={() => this.showTask({ type: 'heal' })}
               onAttack={() => this.showTask({ type: 'attack' })}
