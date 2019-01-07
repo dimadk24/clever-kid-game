@@ -57,7 +57,7 @@ class TaskWindow extends Component {
 
   respond(solution) {
     if (!solution) return;
-    const right = validateSolution(this.task, solution);
+    const right = validateSolution(this.task, solution.toLowerCase());
     if (right) {
       this.setState({ answerType: SUCCESS });
       setTimeout(this.onSuccess, TIME_BEFORE_CLOSE);
