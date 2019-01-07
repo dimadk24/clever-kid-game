@@ -1,4 +1,5 @@
 import React from 'react';
+import CapitalQuestion from './CapitalQuestion/CapitalQuestion';
 import ImageQuestion from './ImageQuestion/ImageQuestion';
 import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import LogoQuestion from './LogoQuestion/LogoQuestion';
@@ -24,6 +25,9 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'logo':
       props.name = task.logo.name;
       return <LogoQuestion {...props} />;
+    case 'capital':
+      props.country = task.capital.country;
+      return <CapitalQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

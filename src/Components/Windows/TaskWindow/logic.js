@@ -2,6 +2,7 @@ import dictionary from '../../../../tasks_configs/translate/dictionary';
 import words from '../../../../tasks_configs/listening/words';
 import images from '../../../../tasks_configs/image/images';
 import logos from '../../../../tasks_configs/logo/logos';
+import countries from '../../../../tasks_configs/capital/countries';
 import { getRandom } from '../../Helpers/utils';
 
 function getRandomSign() {
@@ -86,8 +87,20 @@ function generateLogoTask() {
   };
 }
 
+function generateCapitalTask() {
+  const random = getRandom(0, countries.length);
+  const item = countries[random];
+  return {
+    type: 'capital',
+    capital: {
+      country: item.country,
+      solution: item.capital,
+    },
+  };
+}
+
 function generateTask() {
-  const random = getRandom(0, 5);
+  const random = getRandom(0, 6);
   switch (random) {
     case 0:
       return generateMathTask();
@@ -99,6 +112,8 @@ function generateTask() {
       return generateImageTask();
     case 4:
       return generateLogoTask();
+    case 5:
+      return generateCapitalTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < 2`);
   }
@@ -118,6 +133,8 @@ function validateSolution(task, rawSolution) {
       return task.image.solutions.includes(solution);
     case 'logo':
       return task.logo.name === solution;
+    case 'capital':
+      return task.capital.solution.toLowerCase() === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -129,6 +146,7 @@ export {
   generateTranslateTask,
   generateImageTask,
   generateLogoTask,
+  generateCapitalTask,
   calculateSolution,
   validateSolution,
   generateTask,

@@ -1,5 +1,5 @@
 import {
-  calculateSolution,
+  calculateSolution, generateCapitalTask,
   generateImageTask,
   generateListeningTask, generateLogoTask,
   generateMathTask,
@@ -64,6 +64,16 @@ describe('generateLogoTask', () => {
     const { logo } = task;
     expect(logo).toBeDefined();
     expect(logo.name).toBeString();
+  });
+});
+
+describe('generateCapitalTask', () => {
+  it('should have right types', () => {
+    const task = generateCapitalTask();
+    expect(task.type).toBe('capital');
+    const { capital } = task;
+    expect(capital.country).toBeString();
+    expect(capital.solution).toBeString();
   });
 });
 
@@ -216,5 +226,27 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'apple')).toBeFalsy();
+  });
+
+  it('should validate capital task case insensitively as true', () => {
+    const task = {
+      type: 'capital',
+      capital: {
+        country: 'Belarus',
+        solution: 'Minsk',
+      },
+    };
+    expect(validateSolution(task, 'minsk')).toBeTruthy();
+  });
+
+  it('should validate capital task as false', () => {
+    const task = {
+      type: 'capital',
+      capital: {
+        country: 'Belarus',
+        solution: 'Minsk',
+      },
+    };
+    expect(validateSolution(task, 'Moscow')).toBeFalsy();
   });
 });
