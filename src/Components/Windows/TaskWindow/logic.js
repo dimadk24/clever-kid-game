@@ -153,8 +153,25 @@ function generateMissedWordTask() {
   };
 }
 
+function generateMissedSignTask() {
+  const operands = [
+    getRandom(10, 100),
+    getRandom(10, 100),
+  ];
+  const sign = getRandomItemFromArray(['+', '-']);
+  const equals = calculateSolution({ operands, sign });
+  return {
+    type: 'missedSign',
+    missedSign: {
+      operands,
+      equals,
+      solution: sign,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 11;
+  const taskTypesCount = 12;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -179,6 +196,8 @@ function generateTask() {
       return generateGreaterLessOrEqualTask();
     case 10:
       return generateMissedWordTask();
+    case 11:
+      return generateMissedSignTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -208,6 +227,8 @@ function validateSolution(task, rawSolution) {
       return task.greaterLessOrEqual.solution === solution;
     case 'missedWord':
       return task.missedWord.solution === solution;
+    case 'missedSign':
+      return task.missedSign.solution === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -225,6 +246,7 @@ export {
   generateGreaterLessOrEqualTask,
   getGreaterLessOrEqualSolution,
   generateMissedWordTask,
+  generateMissedSignTask,
   calculateSolution,
   validateSolution,
   generateTask,

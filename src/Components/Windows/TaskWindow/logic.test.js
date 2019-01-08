@@ -2,7 +2,7 @@ import {
   calculateSolution, generateCapitalTask, generateCountryTask, generateGreaterLessOrEqualTask,
   generateImageTask,
   generateListeningTask, generateLogoTask,
-  generateMathTask, generateMissedWordTask,
+  generateMathTask, generateMissedSignTask, generateMissedWordTask,
   generateTranslateTask, generateTrueFalseTask, getGreaterLessOrEqualSolution,
   validateSolution,
 } from './logic';
@@ -149,6 +149,20 @@ describe('generateMissedWordTask', () => {
     expect(missedWord.suggestions).toBeArray();
     expect(missedWord.suggestions[0]).toBeString();
     expect(missedWord.solution).toBeString();
+  });
+});
+
+describe('generateMissedSignTask', () => {
+  it('should have right types', () => {
+    const task = generateMissedSignTask();
+    expect(task.type).toBe('missedSign');
+    const { missedSign } = task;
+    expect(missedSign).toBeDefined();
+    expect(missedSign.operands).toBeArrayOfSize(2);
+    expect(missedSign.operands[0]).toBeNumber();
+    expect(missedSign.equals).toBeNumber();
+    expect(missedSign.solution).toBeString();
+    expect(missedSign.solution).toBeOneOf(['+', '-']);
   });
 });
 
@@ -415,5 +429,29 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'number')).toBeFalsy();
+  });
+
+  it('should validate missedSign task as true', () => {
+    const task = {
+      type: 'missedSign',
+      missedSign: {
+        operands: [10, 5],
+        equals: 15,
+        solution: '+',
+      },
+    };
+    expect(validateSolution(task, '+')).toBeTruthy();
+  });
+
+  it('should validate missedSign task as false', () => {
+    const task = {
+      type: 'missedSign',
+      missedSign: {
+        operands: [10, 5],
+        equals: 15,
+        solution: '+',
+      },
+    };
+    expect(validateSolution(task, '-')).toBeFalsy();
   });
 });
