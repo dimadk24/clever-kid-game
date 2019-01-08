@@ -8,6 +8,7 @@ import LogoQuestion from './LogoQuestion/LogoQuestion';
 import MathQuestion from './MathQuestion/MathQuestion';
 import MissedSignQuestion from './MissedSignQuestion/MissedSignQuestion';
 import MissedWordQuestion from './MissedWordQuestion/MissedWordQuestion';
+import NumberToStringQuestion from './NumberToStringQuestion/NumberToStringQuestion';
 import TranslateQuestion from './TranslateQuestion/TranslateQuestion';
 import TrueFalseQuestion from './TrueFalseQuestion/TrueFalseQuestion';
 
@@ -51,6 +52,9 @@ function mapTaskToQuestion(task, baseOptions) {
       props.operands = task.missedSign.operands;
       props.equals = task.missedSign.equals;
       return <MissedSignQuestion {...props} />;
+    case 'numberToString':
+      props.number = task.numberToString.number;
+      return <NumberToStringQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

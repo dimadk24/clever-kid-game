@@ -2,7 +2,7 @@ import {
   calculateSolution, generateCapitalTask, generateCountryTask, generateGreaterLessOrEqualTask,
   generateImageTask,
   generateListeningTask, generateLogoTask,
-  generateMathTask, generateMissedSignTask, generateMissedWordTask,
+  generateMathTask, generateMissedSignTask, generateMissedWordTask, generateNumberToStringTask,
   generateTranslateTask, generateTrueFalseTask, getGreaterLessOrEqualSolution,
   validateSolution,
 } from './logic';
@@ -163,6 +163,16 @@ describe('generateMissedSignTask', () => {
     expect(missedSign.equals).toBeNumber();
     expect(missedSign.solution).toBeString();
     expect(missedSign.solution).toBeOneOf(['+', '-']);
+  });
+});
+
+describe('generateNumberToStringTask', () => {
+  it('should have right types', () => {
+    const task = generateNumberToStringTask();
+    expect(task.type).toBe('numberToString');
+    const { numberToString } = task;
+    expect(numberToString).toBeDefined();
+    expect(numberToString.number).toBeNumber();
   });
 });
 
@@ -453,5 +463,25 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, '-')).toBeFalsy();
+  });
+
+  it('should validate numberToString task as true', () => {
+    const task = {
+      type: 'numberToString',
+      numberToString: {
+        number: 10,
+      },
+    };
+    expect(validateSolution(task, 'ten')).toBeTruthy();
+  });
+
+  it('should validate numberToString task as false', () => {
+    const task = {
+      type: 'numberToString',
+      numberToString: {
+        number: 10,
+      },
+    };
+    expect(validateSolution(task, 'eight')).toBeFalsy();
   });
 });

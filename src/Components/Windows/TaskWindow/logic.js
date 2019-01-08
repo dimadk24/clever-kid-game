@@ -1,3 +1,4 @@
+import numbered from 'numbered';
 import countries from '../../../../tasks_configs/capital/countries';
 import images from '../../../../tasks_configs/image/images';
 import words from '../../../../tasks_configs/listening/words';
@@ -170,8 +171,18 @@ function generateMissedSignTask() {
   };
 }
 
+function generateNumberToStringTask() {
+  const number = getRandom(10, 100);
+  return {
+    type: 'numberToString',
+    numberToString: {
+      number,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 12;
+  const taskTypesCount = 13;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -198,6 +209,8 @@ function generateTask() {
       return generateMissedWordTask();
     case 11:
       return generateMissedSignTask();
+    case 12:
+      return generateNumberToStringTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -229,6 +242,8 @@ function validateSolution(task, rawSolution) {
       return task.missedWord.solution === solution;
     case 'missedSign':
       return task.missedSign.solution === solution;
+    case 'numberToString':
+      return task.numberToString.number === numbered.parse(solution);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -247,6 +262,7 @@ export {
   getGreaterLessOrEqualSolution,
   generateMissedWordTask,
   generateMissedSignTask,
+  generateNumberToStringTask,
   calculateSolution,
   validateSolution,
   generateTask,
