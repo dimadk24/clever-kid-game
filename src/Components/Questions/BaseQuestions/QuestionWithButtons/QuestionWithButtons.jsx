@@ -41,6 +41,7 @@ class QuestionWithButtons extends Component {
                 key={value}
                 disabled={answered}
                 onClick={() => onSubmit(value)}
+                className="button-question__button"
               >
                 {content}
               </Button>
