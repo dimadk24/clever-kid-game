@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/Components/Questions/ImageQuestion/images/plane.jpg"],"names":["module","exports","__webpack_require__","p"],"mappings":"8EAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"14.c7b06b0882c0c4e518c9.js","sourcesContent":["module.exports = __webpack_public_path__ + \"e63353d3732ec50fdc4d4dd536b9c8cd.jpg\";"],"sourceRoot":""}
