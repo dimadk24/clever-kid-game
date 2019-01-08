@@ -6,19 +6,7 @@ import missedWordDictionary from '../../../../tasks_configs/missed_word/dictiona
 import engToRusDictionary from '../../../../tasks_configs/translate/engToRusDictionary';
 import rusToEngDictionary from '../../../../tasks_configs/translate/rusToEngDictionary';
 import trueFalseQuestions from '../../../../tasks_configs/true_false/questions';
-import { getRandom } from '../../Helpers/utils';
-
-function getRandomSign() {
-  const random = getRandom(0, 2);
-  switch (random) {
-    case 0:
-      return '-';
-    case 1:
-      return '+';
-    default:
-      throw new Error(`Bad random int: ${random}`);
-  }
-}
+import { getRandom, getRandomItemFromArray } from '../../Helpers/utils';
 
 function calculateSolution({ operands, sign }) {
   switch (sign) {
@@ -36,7 +24,7 @@ function generateMathTask() {
     getRandom(10, 100),
     getRandom(10, 100),
   ];
-  const sign = getRandomSign();
+  const sign = getRandomItemFromArray(['+', '-']);
   const solution = calculateSolution({ operands, sign });
   return {
     type: 'math',

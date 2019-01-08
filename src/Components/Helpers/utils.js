@@ -13,6 +13,10 @@ function getRandom(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function getRandomItemFromArray(array) {
+  return array[getRandom(0, array.length)];
+}
+
 function generateMonsterNamePart(name) {
   const part = monsterNameParts[name];
   const random = getRandom(0, part.length);
@@ -33,5 +37,6 @@ export {
   sleep,
   shouldHandleShortcutEvent,
   getRandom,
+  getRandomItemFromArray,
   generateMonsterName,
 };
