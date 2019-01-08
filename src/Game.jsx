@@ -5,6 +5,7 @@ import Hero from './Components/Characters/Hero/Hero';
 import Monster from './Components/Characters/Monster/Monster';
 import CharacterWindow, { LEFT, RIGHT } from './Components/Windows/CharacterWindow/CharacterWindow';
 import { generateMonsterName, sleep } from './Components/Helpers/utils';
+import ChooseTaskWindow from './Components/Windows/ChooseTaskWindow/ChooseTaskWindow';
 import MonsterCounterWindow from './Components/Windows/MonsterCounterWindow/MonsterCounterWindow';
 import SettingsWindow from './Components/Windows/SettingsWindow/SettingsWindow';
 import SpellWindow from './Components/Windows/SpellWindow/SpellWindow';
@@ -49,6 +50,10 @@ class Game extends Component {
       shouldMonsterAttack = await this.updateMonsterHealth(-25);
     }
     if (shouldMonsterAttack && hero.health) await this.monsterAttack();
+  }
+
+  onChooseTask(taskName) {
+    this.setState({ task: taskName, showingTask: true, choosingTask: false });
   }
 
   async monsterAttack() {
@@ -119,7 +124,7 @@ class Game extends Component {
 
   showTask({ type }) {
     this.setState({
-      showingTask: true,
+      choosingTask: true,
       taskType: type,
     });
   }
@@ -129,7 +134,9 @@ class Game extends Component {
       hero,
       monster,
       showingTask,
+      choosingTask,
       isUserTurn,
+      task,
       winCount,
       animateBomb,
       animationPosition,
@@ -147,7 +154,7 @@ class Game extends Component {
         <Monster />
         <SettingsWindow onChangeSound={soundsState => this.setState({ sounds: soundsState })} />
         {
-          isUserTurn && !showingTask && !animating && (
+          isUserTurn && !showingTask && !animating && !choosingTask && (
             <SpellWindow
               onHeal={() => this.showTask({ type: 'heal' })}
               onAttack={() => this.showTask({ type: 'attack' })}
@@ -156,8 +163,17 @@ class Game extends Component {
           )
         }
         {
+          choosingTask && (
+            <ChooseTaskWindow
+              onChoose={choosenTask => this.onChooseTask(choosenTask)}
+              onClose={() => this.setState({ choosingTask: false })}
+            />
+          )
+        }
+        {
           showingTask && (
             <TaskWindow
+              taskName={task}
               onFail={() => this.monsterAttack()}
               onSuccess={() => this.onSuccess()}
               onClose={() => this.setState({ showingTask: false })}

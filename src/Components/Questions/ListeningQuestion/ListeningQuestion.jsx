@@ -3,9 +3,21 @@ import 'core-js/modules/es6.promise';
 import { Howl } from 'howler';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import words from '../../../../tasks_configs/listening/words';
 import Button from '../../Helpers/Button/Button';
 import Loader from '../../Helpers/Loader/Loader';
+import { getRandom } from '../../Helpers/utils';
 import QuestionWithTextAnswer from '../BaseQuestions/QuestionWithTextAnswer/QuestionWithTextAnswer';
+import { addQuestion } from '../questionTypes';
+
+function generate() {
+  const random = getRandom(0, words.length);
+  return {
+    type: 'listening',
+    name: words[random],
+    solution: words[random],
+  };
+}
 
 class ListeningQuestion extends Component {
   constructor(props) {
@@ -61,4 +73,5 @@ ListeningQuestion.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default ListeningQuestion;
+addQuestion('listening', { render: ListeningQuestion, generate });
+export default generate;

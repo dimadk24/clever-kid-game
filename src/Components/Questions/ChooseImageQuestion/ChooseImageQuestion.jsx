@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import chooseImagesDictionary from '../../../../tasks_configs/choose_image/images';
 import Loader from '../../Helpers/Loader/Loader';
+import { getRandomItemFromArray } from '../../Helpers/utils';
 import QuestionWithButtons from '../BaseQuestions/QuestionWithButtons/QuestionWithButtons';
+import { addQuestion } from '../questionTypes';
 
 function createShortcutCode(zeroBasedIndex) {
   const index = zeroBasedIndex + 1;
   if (index > 9) throw new Error(`Too many suggestions: ${index}. We can only have 9 at max`);
   return `Digit${index}`;
+}
+
+function generate() {
+  const image = getRandomItemFromArray(chooseImagesDictionary);
+  return {
+    type: 'chooseImage',
+    object: image.object,
+    suggestions: image.suggestions,
+  };
+}
+
+function validate(task, userSolution) {
+  return task.object === userSolution;
 }
 
 class ChooseImageQuestion extends Component {
@@ -45,4 +61,5 @@ ChooseImageQuestion.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default ChooseImageQuestion;
+addQuestion('chooseImage', { render: ChooseImageQuestion, generate, validate });
+export { generate, validate };

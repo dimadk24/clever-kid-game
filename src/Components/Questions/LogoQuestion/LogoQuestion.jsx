@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import logos from '../../../../tasks_configs/logo/logos';
 import Loader from '../../Helpers/Loader/Loader';
+import { getRandom } from '../../Helpers/utils';
 import QuestionWithTextAnswer from '../BaseQuestions/QuestionWithTextAnswer/QuestionWithTextAnswer';
+import { addQuestion } from '../questionTypes';
 
+function generate() {
+  const random = getRandom(0, logos.length);
+  const item = logos[random];
+  return {
+    type: 'logo',
+    name: item,
+  };
+}
+
+function validate(task, userSolution) {
+  return task.name === userSolution;
+}
 
 class LogoQuestion extends Component {
   constructor(props) {
@@ -39,4 +54,5 @@ LogoQuestion.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default LogoQuestion;
+addQuestion('logo', { render: LogoQuestion, generate, validate });
+export { generate, validate };

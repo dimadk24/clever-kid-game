@@ -1,6 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { calculateMathSolution, getRandom, getRandomItemFromArray } from '../../Helpers/utils';
 import QuestionWithButtons from '../BaseQuestions/QuestionWithButtons/QuestionWithButtons';
+import { addQuestion } from '../questionTypes';
+
+
+function generate() {
+  const operands = [
+    getRandom(10, 100),
+    getRandom(10, 100),
+  ];
+  const sign = getRandomItemFromArray(['+', '-']);
+  const equals = calculateMathSolution({ operands, sign });
+  return {
+    type: 'missedSign',
+    operands,
+    equals,
+    solution: sign,
+  };
+}
 
 const answers = [
   {
@@ -36,4 +54,5 @@ MissedSignQuestion.propTypes = {
   equals: PropTypes.number.isRequired,
 };
 
-export default MissedSignQuestion;
+addQuestion('missedSign', { render: MissedSignQuestion, generate });
+export default generate;

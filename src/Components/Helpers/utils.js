@@ -32,6 +32,17 @@ function generateMonsterName() {
   return name.slice(0, -1);
 }
 
+function calculateMathSolution({ operands, sign }) {
+  switch (sign) {
+    case '+':
+      return operands[0] + operands[1];
+    case '-':
+      return operands[0] - operands[1];
+    default:
+      throw new Error(`Wrong sign: ${sign}`);
+  }
+}
+
 
 export {
   sleep,
@@ -39,4 +50,5 @@ export {
   getRandom,
   getRandomItemFromArray,
   generateMonsterName,
+  calculateMathSolution,
 };

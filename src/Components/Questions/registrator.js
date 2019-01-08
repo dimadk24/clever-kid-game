@@ -1,0 +1,15 @@
+import './CalculateTimeQuestion/CalculateTimeQuestion';
+import './CapitalQuestion/CapitalQuestion';
+import './ChooseImageQuestion/ChooseImageQuestion';
+import './CountryQuestion/CountryQuestion';
+import './GreaterLessOrEqualQuestion/GreaterLessOrEqualQuestion';
+import './ImageQuestion/ImageQuestion';
+import './ListeningQuestion/ListeningQuestion';
+import './LogoQuestion/LogoQuestion';
+import './MathQuestion/MathQuestion';
+import './MissedSignQuestion/MissedSignQuestion';
+import './MissedWordQuestion/MissedWordQuestion';
+import './NumberToStringQuestion/NumberToStringQuestion';
+import './TranslateToEngQuestion/TranslateToEngQuestion';
+import './TranslateToRusQuestion/TranslateToRusQuestion';
+import './TrueFalseQuestion/TrueFalseQuestion';

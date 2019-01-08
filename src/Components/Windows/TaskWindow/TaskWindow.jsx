@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import '../../../assets/fonts/fontello/css/fontello.css';
 import Button from '../../Helpers/Button/Button';
-import mapTaskToQuestion from '../../Questions/mapper';
 import '../../utils.scss';
-import { generateTask, validateSolution } from './logic';
+import { getQuestion } from '../../Questions/questionTypes';
+import validate from '../../Questions/validate';
 import './TaskWindow.scss';
+import '../../Questions/registrator';
 
 const INITIAL_WINDOW_CLASS_NAME = 'task__window horizontal-center';
 const NOT_ANSWERED = 'not answered';
@@ -27,8 +28,13 @@ function generateWindowClassName(answerType) {
 class TaskWindow extends Component {
   constructor(props) {
     super(props);
+    const { taskName } = props;
+    const question = getQuestion(taskName);
+    const task = question.generate();
     this.state = {
       answerType: NOT_ANSWERED,
+      task,
+      question,
     };
     this.onFail = () => {
       props.onFail();
@@ -39,7 +45,6 @@ class TaskWindow extends Component {
       props.onClose();
     };
     this.onClose = () => props.onClose();
-    this.task = generateTask();
     this.keyDownCallback = e => this.onKeyDown(e);
   }
 
@@ -57,7 +62,8 @@ class TaskWindow extends Component {
 
   respond(solution) {
     if (!solution) return;
-    const right = validateSolution(this.task, solution);
+    const { question, task } = this.state;
+    const right = validate(task, solution, question.validate);
     if (right) {
       this.setState({ answerType: SUCCESS });
       setTimeout(this.onSuccess, TIME_BEFORE_CLOSE);
@@ -68,7 +74,7 @@ class TaskWindow extends Component {
   }
 
   render() {
-    const { answerType } = this.state;
+    const { answerType, question, task } = this.state;
     const answered = answerType !== NOT_ANSWERED;
     const windowClassName = generateWindowClassName(answerType);
     return (
@@ -77,7 +83,8 @@ class TaskWindow extends Component {
           <i className="icon-close" />
         </Button>
         {
-          mapTaskToQuestion(this.task, {
+          React.createElement(question.render, {
+            ...task,
             onSubmit: solution => this.respond(solution),
             answered,
           })
@@ -91,11 +98,11 @@ TaskWindow.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   onFail: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
+  taskName: PropTypes.string.isRequired,
 };
 
 export default TaskWindow;
 export {
-  validateSolution,
   generateWindowClassName,
   NOT_ANSWERED,
   SUCCESS,

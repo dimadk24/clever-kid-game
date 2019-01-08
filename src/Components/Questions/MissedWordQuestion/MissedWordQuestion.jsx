@@ -1,11 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import missedWordDictionary from '../../../../tasks_configs/missed_word/dictionary';
+import { getRandom } from '../../Helpers/utils';
 import QuestionWithButtons from '../BaseQuestions/QuestionWithButtons/QuestionWithButtons';
+import { addQuestion } from '../questionTypes';
 
 function createShortcutCode(zeroBasedIndex) {
   const index = zeroBasedIndex + 1;
   if (index > 9) throw new Error(`Too many suggestions: ${index}. We can only have 9 at max`);
   return `Digit${index}`;
+}
+
+function generate() {
+  const random = getRandom(0, missedWordDictionary.length);
+  const item = missedWordDictionary[random];
+  return {
+    type: 'missedWord',
+    parts: item.parts,
+    suggestions: item.suggestions,
+    solution: item.solution,
+  };
 }
 
 
@@ -30,5 +44,5 @@ MissedWordQuestion.propTypes = {
   suggestions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default MissedWordQuestion;
-export { createShortcutCode };
+addQuestion('missedWord', { render: MissedWordQuestion, generate });
+export { createShortcutCode, generate };

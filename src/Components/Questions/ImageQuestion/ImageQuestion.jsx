@@ -1,8 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import images from '../../../../tasks_configs/image/images';
 import Loader from '../../Helpers/Loader/Loader';
+import { getRandom } from '../../Helpers/utils';
 import QuestionWithTextAnswer from '../BaseQuestions/QuestionWithTextAnswer/QuestionWithTextAnswer';
+import { addQuestion } from '../questionTypes';
 
+
+function generate() {
+  const randomInt = getRandom(0, images.length);
+  const item = images[randomInt];
+  return {
+    type: 'image',
+    name: item.name,
+    solutions: item.solutions,
+  };
+}
 
 class ImageQuestion extends Component {
   constructor(props) {
@@ -39,4 +52,5 @@ ImageQuestion.propTypes = {
   name: PropTypes.string.isRequired,
 };
 
-export default ImageQuestion;
+addQuestion('image', { render: ImageQuestion, generate });
+export default generate;
