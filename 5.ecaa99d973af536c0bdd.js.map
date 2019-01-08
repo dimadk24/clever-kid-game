@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./src/Components/Characters/Monster/images/bodies/2.png"],"names":["module","exports","__webpack_require__","p"],"mappings":"6EAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"5.ecaa99d973af536c0bdd.js","sourcesContent":["module.exports = __webpack_public_path__ + \"ac8e932efad86297c2f87375608bc4f8.png\";"],"sourceRoot":""}

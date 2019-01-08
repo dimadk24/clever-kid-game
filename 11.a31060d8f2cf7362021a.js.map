@@ -1,0 +1,1 @@
+{"version":3,"sources":["webpack:///./src/Components/Questions/ChooseImageQuestion/images/train.jpg"],"names":["module","exports","__webpack_require__","p"],"mappings":"8EAAAA,EAAAC,QAAiBC,EAAAC,EAAuB","file":"11.a31060d8f2cf7362021a.js","sourcesContent":["module.exports = __webpack_public_path__ + \"8cf1b12a6d189a7d249c69509c2327be.jpg\";"],"sourceRoot":""}
