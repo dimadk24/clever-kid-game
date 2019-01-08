@@ -30,7 +30,9 @@ function generateMathTask() {
   const solution = calculateSolution({ operands, sign });
   return {
     type: 'math',
-    math: { operands, sign, solution },
+    operands,
+    sign,
+    solution,
   };
 }
 
@@ -38,10 +40,8 @@ function generateListeningTask() {
   const random = getRandom(0, words.length);
   return {
     type: 'listening',
-    listening: {
-      name: words[random],
-      solution: words[random],
-    },
+    name: words[random],
+    solution: words[random],
   };
 }
 
@@ -54,11 +54,9 @@ function generateTranslateTask(toLang) {
   const item = dictionary[randomInt];
   return {
     type: 'translate',
-    translate: {
-      toLang,
-      word: item.word,
-      solutions: item.translations,
-    },
+    toLang,
+    word: item.word,
+    solutions: item.translations,
   };
 }
 
@@ -67,10 +65,8 @@ function generateImageTask() {
   const item = images[randomInt];
   return {
     type: 'image',
-    image: {
-      name: item.name,
-      solutions: item.solutions,
-    },
+    name: item.name,
+    solutions: item.solutions,
   };
 }
 
@@ -79,9 +75,7 @@ function generateLogoTask() {
   const item = logos[random];
   return {
     type: 'logo',
-    logo: {
-      name: item,
-    },
+    name: item,
   };
 }
 
@@ -90,10 +84,8 @@ function generateCapitalTask() {
   const item = countries[random];
   return {
     type: 'capital',
-    capital: {
-      country: item.country,
-      solution: item.capital,
-    },
+    country: item.country,
+    solution: item.capital,
   };
 }
 
@@ -102,10 +94,8 @@ function generateCountryTask() {
   const item = countries[random];
   return {
     type: 'country',
-    country: {
-      capital: item.capital,
-      solution: item.country,
-    },
+    capital: item.capital,
+    solution: item.country,
   };
 }
 
@@ -114,10 +104,8 @@ function generateTrueFalseTask() {
   const item = trueFalseQuestions[random];
   return {
     type: 'trueFalse',
-    trueFalse: {
-      question: item.question,
-      solution: String(item.right),
-    },
+    question: item.question,
+    solution: String(item.right),
   };
 }
 
@@ -135,10 +123,8 @@ function generateGreaterLessOrEqualTask() {
   const solution = getGreaterLessOrEqualSolution(...operands);
   return {
     type: 'greaterLessOrEqual',
-    greaterLessOrEqual: {
-      operands,
-      solution,
-    },
+    operands,
+    solution,
   };
 }
 
@@ -147,11 +133,9 @@ function generateMissedWordTask() {
   const item = missedWordDictionary[random];
   return {
     type: 'missedWord',
-    missedWord: {
-      parts: item.parts,
-      suggestions: item.suggestions,
-      solution: item.solution,
-    },
+    parts: item.parts,
+    suggestions: item.suggestions,
+    solution: item.solution,
   };
 }
 
@@ -164,11 +148,9 @@ function generateMissedSignTask() {
   const equals = calculateSolution({ operands, sign });
   return {
     type: 'missedSign',
-    missedSign: {
-      operands,
-      equals,
-      solution: sign,
-    },
+    operands,
+    equals,
+    solution: sign,
   };
 }
 
@@ -176,9 +158,7 @@ function generateNumberToStringTask() {
   const number = getRandom(10, 100);
   return {
     type: 'numberToString',
-    numberToString: {
-      number,
-    },
+    number,
   };
 }
 
@@ -186,10 +166,8 @@ function generateChooseImageTask() {
   const image = getRandomItemFromArray(chooseImagesDictionary);
   return {
     type: 'chooseImage',
-    chooseImage: {
-      object: image.object,
-      suggestions: image.suggestions,
-    },
+    object: image.object,
+    suggestions: image.suggestions,
   };
 }
 
@@ -198,11 +176,9 @@ function generateCalculateTimeTask() {
   const minutes = getRandom(10, 60);
   return {
     type: 'calculateTime',
-    calculateTime: {
-      hours,
-      minutes,
-      solution: hours * 60 + minutes,
-    },
+    hours,
+    minutes,
+    solution: hours * 60 + minutes,
   };
 }
 
@@ -250,33 +226,33 @@ function validateSolution(task, rawSolution) {
   const { type } = task;
   switch (type) {
     case 'math':
-      return task.math.solution === parseInt(solution, 10);
+      return task.solution === parseInt(solution, 10);
     case 'listening':
-      return task.listening.solution === solution;
+      return task.solution === solution;
     case 'translate':
-      return task.translate.solutions.includes(solution);
+      return task.solutions.includes(solution);
     case 'image':
-      return task.image.solutions.includes(solution);
+      return task.solutions.includes(solution);
     case 'logo':
-      return task.logo.name === solution;
+      return task.name === solution;
     case 'capital':
-      return task.capital.solution.toLowerCase() === solution;
+      return task.solution.toLowerCase() === solution;
     case 'country':
-      return task.country.solution.toLowerCase() === solution;
+      return task.solution.toLowerCase() === solution;
     case 'trueFalse':
-      return task.trueFalse.solution === solution;
+      return task.solution === solution;
     case 'greaterLessOrEqual':
-      return task.greaterLessOrEqual.solution === solution;
+      return task.solution === solution;
     case 'missedWord':
-      return task.missedWord.solution === solution;
+      return task.solution === solution;
     case 'missedSign':
-      return task.missedSign.solution === solution;
+      return task.solution === solution;
     case 'numberToString':
-      return task.numberToString.number === numbered.parse(solution);
+      return task.number === numbered.parse(solution);
     case 'chooseImage':
-      return task.chooseImage.object === solution;
+      return task.object === solution;
     case 'calculateTime':
-      return task.calculateTime.solution === parseInt(solution, 10);
+      return task.solution === parseInt(solution, 10);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }

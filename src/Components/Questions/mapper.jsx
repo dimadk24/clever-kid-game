@@ -18,52 +18,52 @@ function mapTaskToQuestion(task, baseOptions) {
   const props = { ...baseOptions };
   switch (task.type) {
     case 'math':
-      props.sign = task.math.sign;
-      props.operands = task.math.operands;
+      props.sign = task.sign;
+      props.operands = task.operands;
       return <MathQuestion {...props} />;
     case 'listening':
-      props.name = task.listening.name;
+      props.name = task.name;
       return <ListeningQuestion {...props} />;
     case 'translate':
-      props.word = task.translate.word;
-      props.toLang = task.translate.toLang;
+      props.word = task.word;
+      props.toLang = task.toLang;
       return <TranslateQuestion {...props} />;
     case 'image':
-      props.name = task.image.name;
+      props.name = task.name;
       return <ImageQuestion {...props} />;
     case 'logo':
-      props.name = task.logo.name;
+      props.name = task.name;
       return <LogoQuestion {...props} />;
     case 'capital':
-      props.country = task.capital.country;
+      props.country = task.country;
       return <CapitalQuestion {...props} />;
     case 'country':
-      props.capital = task.country.capital;
+      props.capital = task.capital;
       return <CountryQuestion {...props} />;
     case 'trueFalse':
-      props.question = task.trueFalse.question;
+      props.question = task.question;
       return <TrueFalseQuestion {...props} />;
     case 'greaterLessOrEqual':
-      props.operands = task.greaterLessOrEqual.operands;
+      props.operands = task.operands;
       return <GreaterLessOrEqualQuestion {...props} />;
     case 'missedWord':
-      props.parts = task.missedWord.parts;
-      props.suggestions = task.missedWord.suggestions;
+      props.parts = task.parts;
+      props.suggestions = task.suggestions;
       return <MissedWordQuestion {...props} />;
     case 'missedSign':
-      props.operands = task.missedSign.operands;
-      props.equals = task.missedSign.equals;
+      props.operands = task.operands;
+      props.equals = task.equals;
       return <MissedSignQuestion {...props} />;
     case 'numberToString':
-      props.number = task.numberToString.number;
+      props.number = task.number;
       return <NumberToStringQuestion {...props} />;
     case 'chooseImage':
-      props.object = task.chooseImage.object;
-      props.suggestions = task.chooseImage.suggestions;
+      props.object = task.object;
+      props.suggestions = task.suggestions;
       return <ChooseImageQuestion {...props} />;
     case 'calculateTime':
-      props.hours = task.calculateTime.hours;
-      props.minutes = task.calculateTime.minutes;
+      props.hours = task.hours;
+      props.minutes = task.minutes;
       return <CalculateTimeQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
