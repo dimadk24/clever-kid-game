@@ -1,5 +1,6 @@
 import React from 'react';
 import CapitalQuestion from './CapitalQuestion/CapitalQuestion';
+import ChooseImageQuestion from './ChooseImageQuestion/ChooseImageQuestion';
 import CountryQuestion from './CountryQuestion/CountryQuestion';
 import GreaterLessOrEqualQuestion from './GreaterLessOrEqualQuestion/GreaterLessOrEqualQuestion';
 import ImageQuestion from './ImageQuestion/ImageQuestion';
@@ -55,6 +56,10 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'numberToString':
       props.number = task.numberToString.number;
       return <NumberToStringQuestion {...props} />;
+    case 'chooseImage':
+      props.object = task.chooseImage.object;
+      props.suggestions = task.chooseImage.suggestions;
+      return <ChooseImageQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

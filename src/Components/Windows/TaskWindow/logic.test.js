@@ -1,9 +1,19 @@
 import {
-  calculateSolution, generateCapitalTask, generateCountryTask, generateGreaterLessOrEqualTask,
+  calculateSolution,
+  generateCapitalTask,
+  generateChooseImageTask,
+  generateCountryTask,
+  generateGreaterLessOrEqualTask,
   generateImageTask,
-  generateListeningTask, generateLogoTask,
-  generateMathTask, generateMissedSignTask, generateMissedWordTask, generateNumberToStringTask,
-  generateTranslateTask, generateTrueFalseTask, getGreaterLessOrEqualSolution,
+  generateListeningTask,
+  generateLogoTask,
+  generateMathTask,
+  generateMissedSignTask,
+  generateMissedWordTask,
+  generateNumberToStringTask,
+  generateTranslateTask,
+  generateTrueFalseTask,
+  getGreaterLessOrEqualSolution,
   validateSolution,
 } from './logic';
 
@@ -173,6 +183,18 @@ describe('generateNumberToStringTask', () => {
     const { numberToString } = task;
     expect(numberToString).toBeDefined();
     expect(numberToString.number).toBeNumber();
+  });
+});
+
+describe('generateChooseImageTask', () => {
+  it('should have right types', () => {
+    const task = generateChooseImageTask();
+    expect(task.type).toBe('chooseImage');
+    const { chooseImage } = task;
+    expect(chooseImage).toBeDefined();
+    expect(chooseImage.object).toBeString();
+    expect(chooseImage.suggestions).toBeArray();
+    expect(chooseImage.suggestions[0]).toBeString();
   });
 });
 
@@ -483,5 +505,31 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'eight')).toBeFalsy();
+  });
+
+  it('should validate chooseImage task as true', () => {
+    const task = {
+      type: 'chooseImage',
+      chooseImage: {
+        object: 'ship',
+        suggestions: [
+          'ship', 'flower',
+        ],
+      },
+    };
+    expect(validateSolution(task, 'ship')).toBeTruthy();
+  });
+
+  it('should validate chooseImage task as false', () => {
+    const task = {
+      type: 'chooseImage',
+      chooseImage: {
+        object: 'ship',
+        suggestions: [
+          'ship', 'flower',
+        ],
+      },
+    };
+    expect(validateSolution(task, 'flower')).toBeFalsy();
   });
 });

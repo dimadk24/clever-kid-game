@@ -7,6 +7,7 @@ import missedWordDictionary from '../../../../tasks_configs/missed_word/dictiona
 import engToRusDictionary from '../../../../tasks_configs/translate/engToRusDictionary';
 import rusToEngDictionary from '../../../../tasks_configs/translate/rusToEngDictionary';
 import trueFalseQuestions from '../../../../tasks_configs/true_false/questions';
+import chooseImagesDictionary from '../../../../tasks_configs/choose_image/images';
 import { getRandom, getRandomItemFromArray } from '../../Helpers/utils';
 
 function calculateSolution({ operands, sign }) {
@@ -181,8 +182,19 @@ function generateNumberToStringTask() {
   };
 }
 
+function generateChooseImageTask() {
+  const image = getRandomItemFromArray(chooseImagesDictionary);
+  return {
+    type: 'chooseImage',
+    chooseImage: {
+      object: image.object,
+      suggestions: image.suggestions,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 13;
+  const taskTypesCount = 14;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -211,6 +223,8 @@ function generateTask() {
       return generateMissedSignTask();
     case 12:
       return generateNumberToStringTask();
+    case 13:
+      return generateChooseImageTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -244,6 +258,8 @@ function validateSolution(task, rawSolution) {
       return task.missedSign.solution === solution;
     case 'numberToString':
       return task.numberToString.number === numbered.parse(solution);
+    case 'chooseImage':
+      return task.chooseImage.object === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -263,6 +279,7 @@ export {
   generateMissedWordTask,
   generateMissedSignTask,
   generateNumberToStringTask,
+  generateChooseImageTask,
   calculateSolution,
   validateSolution,
   generateTask,
