@@ -2,6 +2,7 @@ import countries from '../../../../tasks_configs/capital/countries';
 import images from '../../../../tasks_configs/image/images';
 import words from '../../../../tasks_configs/listening/words';
 import logos from '../../../../tasks_configs/logo/logos';
+import missedWordDictionary from '../../../../tasks_configs/missed_word/dictionary';
 import engToRusDictionary from '../../../../tasks_configs/translate/engToRusDictionary';
 import rusToEngDictionary from '../../../../tasks_configs/translate/rusToEngDictionary';
 import trueFalseQuestions from '../../../../tasks_configs/true_false/questions';
@@ -151,8 +152,21 @@ function generateGreaterLessOrEqualTask() {
   };
 }
 
+function generateMissedWordTask() {
+  const random = getRandom(0, missedWordDictionary.length);
+  const item = missedWordDictionary[random];
+  return {
+    type: 'missedWord',
+    missedWord: {
+      parts: item.parts,
+      suggestions: item.suggestions,
+      solution: item.solution,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 10;
+  const taskTypesCount = 11;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -175,6 +189,8 @@ function generateTask() {
       return generateTrueFalseTask();
     case 9:
       return generateGreaterLessOrEqualTask();
+    case 10:
+      return generateMissedWordTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -202,6 +218,8 @@ function validateSolution(task, rawSolution) {
       return task.trueFalse.solution === solution;
     case 'greaterLessOrEqual':
       return task.greaterLessOrEqual.solution === solution;
+    case 'missedWord':
+      return task.missedWord.solution === solution;
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -218,6 +236,7 @@ export {
   generateTrueFalseTask,
   generateGreaterLessOrEqualTask,
   getGreaterLessOrEqualSolution,
+  generateMissedWordTask,
   calculateSolution,
   validateSolution,
   generateTask,

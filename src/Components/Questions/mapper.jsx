@@ -6,6 +6,7 @@ import ImageQuestion from './ImageQuestion/ImageQuestion';
 import ListeningQuestion from './ListeningQuestion/ListeningQuestion';
 import LogoQuestion from './LogoQuestion/LogoQuestion';
 import MathQuestion from './MathQuestion/MathQuestion';
+import MissedWordQuestion from './MissedWordQuestion/MissedWordQuestion';
 import TranslateQuestion from './TranslateQuestion/TranslateQuestion';
 import TrueFalseQuestion from './TrueFalseQuestion/TrueFalseQuestion';
 
@@ -41,6 +42,10 @@ function mapTaskToQuestion(task, baseOptions) {
     case 'greaterLessOrEqual':
       props.operands = task.greaterLessOrEqual.operands;
       return <GreaterLessOrEqualQuestion {...props} />;
+    case 'missedWord':
+      props.parts = task.missedWord.parts;
+      props.suggestions = task.missedWord.suggestions;
+      return <MissedWordQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

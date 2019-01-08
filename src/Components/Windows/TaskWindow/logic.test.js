@@ -2,7 +2,7 @@ import {
   calculateSolution, generateCapitalTask, generateCountryTask, generateGreaterLessOrEqualTask,
   generateImageTask,
   generateListeningTask, generateLogoTask,
-  generateMathTask,
+  generateMathTask, generateMissedWordTask,
   generateTranslateTask, generateTrueFalseTask, getGreaterLessOrEqualSolution,
   validateSolution,
 } from './logic';
@@ -135,6 +135,20 @@ describe('getGreaterLessOrEqualSolution', () => {
 
   it('should find equal solution', () => {
     expect(getGreaterLessOrEqualSolution(10, 10)).toBe('=');
+  });
+});
+
+describe('generateMissedWordTask', () => {
+  it('should have right types', () => {
+    const task = generateMissedWordTask();
+    expect(task.type).toBe('missedWord');
+    const { missedWord } = task;
+    expect(missedWord).toBeDefined();
+    expect(missedWord.parts).toBeArrayOfSize(2);
+    expect(missedWord.parts[0]).toBeString();
+    expect(missedWord.suggestions).toBeArray();
+    expect(missedWord.suggestions[0]).toBeString();
+    expect(missedWord.solution).toBeString();
   });
 });
 
@@ -377,5 +391,29 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, '>')).toBeFalsy();
+  });
+
+  it('should validate missedWord task as true', () => {
+    const task = {
+      type: 'missedWord',
+      missedWord: {
+        parts: ['test', 'of smth'],
+        suggestions: ['string', 'number'],
+        solution: 'string',
+      },
+    };
+    expect(validateSolution(task, 'string')).toBeTruthy();
+  });
+
+  it('should validate missedWord task as false', () => {
+    const task = {
+      type: 'missedWord',
+      missedWord: {
+        parts: ['test', 'of smth'],
+        suggestions: ['string', 'number'],
+        solution: 'string',
+      },
+    };
+    expect(validateSolution(task, 'number')).toBeFalsy();
   });
 });
