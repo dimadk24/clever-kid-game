@@ -1,4 +1,5 @@
 import React from 'react';
+import CalculateTimeQuestion from './CalculateTimeQuestion/CalculateTimeQuestion';
 import CapitalQuestion from './CapitalQuestion/CapitalQuestion';
 import ChooseImageQuestion from './ChooseImageQuestion/ChooseImageQuestion';
 import CountryQuestion from './CountryQuestion/CountryQuestion';
@@ -60,6 +61,10 @@ function mapTaskToQuestion(task, baseOptions) {
       props.object = task.chooseImage.object;
       props.suggestions = task.chooseImage.suggestions;
       return <ChooseImageQuestion {...props} />;
+    case 'calculateTime':
+      props.hours = task.calculateTime.hours;
+      props.minutes = task.calculateTime.minutes;
+      return <CalculateTimeQuestion {...props} />;
     default:
       throw new Error(`Wrong task type: ${task.type}`);
   }

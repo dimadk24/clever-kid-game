@@ -1,5 +1,5 @@
 import {
-  calculateSolution,
+  calculateSolution, generateCalculateTimeTask,
   generateCapitalTask,
   generateChooseImageTask,
   generateCountryTask,
@@ -195,6 +195,20 @@ describe('generateChooseImageTask', () => {
     expect(chooseImage.object).toBeString();
     expect(chooseImage.suggestions).toBeArray();
     expect(chooseImage.suggestions[0]).toBeString();
+  });
+});
+
+describe('generateCalculateTimeTask', () => {
+  it('should have right types', () => {
+    const task = generateCalculateTimeTask();
+    expect(task.type).toBe('calculateTime');
+    const { calculateTime } = task;
+    expect(calculateTime).toBeDefined();
+    expect(calculateTime.hours).toBeNumber();
+    expect(calculateTime.hours).toBeLessThan(24);
+    expect(calculateTime.minutes).toBeNumber();
+    expect(calculateTime.minutes).toBeLessThan(60);
+    expect(calculateTime.solution).toBeNumber();
   });
 });
 
@@ -531,5 +545,29 @@ describe('validateSolution', () => {
       },
     };
     expect(validateSolution(task, 'flower')).toBeFalsy();
+  });
+
+  it('should validate calculateTime task as true', () => {
+    const task = {
+      type: 'calculateTime',
+      calculateTime: {
+        hours: 7,
+        minutes: 20,
+        solution: 440,
+      },
+    };
+    expect(validateSolution(task, '440')).toBeTruthy();
+  });
+
+  it('should validate calculateTime task as false', () => {
+    const task = {
+      type: 'calculateTime',
+      calculateTime: {
+        hours: 7,
+        minutes: 20,
+        solution: 440,
+      },
+    };
+    expect(validateSolution(task, '400')).toBeFalsy();
   });
 });

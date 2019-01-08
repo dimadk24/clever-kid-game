@@ -193,8 +193,21 @@ function generateChooseImageTask() {
   };
 }
 
+function generateCalculateTimeTask() {
+  const hours = getRandom(3, 10);
+  const minutes = getRandom(10, 60);
+  return {
+    type: 'calculateTime',
+    calculateTime: {
+      hours,
+      minutes,
+      solution: hours * 60 + minutes,
+    },
+  };
+}
+
 function generateTask() {
-  const taskTypesCount = 14;
+  const taskTypesCount = 15;
   const random = getRandom(0, taskTypesCount);
   switch (random) {
     case 0:
@@ -225,6 +238,8 @@ function generateTask() {
       return generateNumberToStringTask();
     case 13:
       return generateChooseImageTask();
+    case 14:
+      return generateCalculateTimeTask();
     default:
       throw new Error(`Bad random: ${random}. Expected it to be >=0 and < ${taskTypesCount}`);
   }
@@ -260,6 +275,8 @@ function validateSolution(task, rawSolution) {
       return task.numberToString.number === numbered.parse(solution);
     case 'chooseImage':
       return task.chooseImage.object === solution;
+    case 'calculateTime':
+      return task.calculateTime.solution === parseInt(solution, 10);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
@@ -280,6 +297,7 @@ export {
   generateMissedSignTask,
   generateNumberToStringTask,
   generateChooseImageTask,
+  generateCalculateTimeTask,
   calculateSolution,
   validateSolution,
   generateTask,
