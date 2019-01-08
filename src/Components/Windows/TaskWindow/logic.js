@@ -1,9 +1,9 @@
+import countries from '../../../../tasks_configs/capital/countries';
+import images from '../../../../tasks_configs/image/images';
+import words from '../../../../tasks_configs/listening/words';
+import logos from '../../../../tasks_configs/logo/logos';
 import engToRusDictionary from '../../../../tasks_configs/translate/engToRusDictionary';
 import rusToEngDictionary from '../../../../tasks_configs/translate/rusToEngDictionary';
-import words from '../../../../tasks_configs/listening/words';
-import images from '../../../../tasks_configs/image/images';
-import logos from '../../../../tasks_configs/logo/logos';
-import countries from '../../../../tasks_configs/capital/countries';
 import trueFalseQuestions from '../../../../tasks_configs/true_false/questions';
 import { getRandom } from '../../Helpers/utils';
 
