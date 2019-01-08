@@ -12,7 +12,11 @@ class QuestionWithTextAnswer extends Component {
   }
 
   onInputChange(e) {
-    const userSolution = e.target.value.trim();
+    const { spaceAllowed } = this.props;
+    const inputValue = e.target.value;
+    let userSolution;
+    if (spaceAllowed) userSolution = inputValue;
+    else userSolution = inputValue.trim();
     this.setState({ userSolution });
   }
 
@@ -56,6 +60,11 @@ QuestionWithTextAnswer.propTypes = {
   question: PropTypes.node.isRequired,
   onSubmit: PropTypes.func.isRequired,
   answered: PropTypes.bool.isRequired,
+  spaceAllowed: PropTypes.bool,
+};
+
+QuestionWithTextAnswer.defaultProps = {
+  spaceAllowed: false,
 };
 
 export default QuestionWithTextAnswer;
