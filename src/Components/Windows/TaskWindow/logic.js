@@ -226,33 +226,26 @@ function validateSolution(task, rawSolution) {
   const { type } = task;
   switch (type) {
     case 'math':
+    case 'calculateTime':
       return task.solution === parseInt(solution, 10);
     case 'listening':
+    case 'trueFalse':
+    case 'greaterLessOrEqual':
+    case 'missedWord':
+    case 'missedSign':
       return task.solution === solution;
     case 'translate':
-      return task.solutions.includes(solution);
     case 'image':
       return task.solutions.includes(solution);
     case 'logo':
       return task.name === solution;
     case 'capital':
-      return task.solution.toLowerCase() === solution;
     case 'country':
       return task.solution.toLowerCase() === solution;
-    case 'trueFalse':
-      return task.solution === solution;
-    case 'greaterLessOrEqual':
-      return task.solution === solution;
-    case 'missedWord':
-      return task.solution === solution;
-    case 'missedSign':
-      return task.solution === solution;
     case 'numberToString':
       return task.number === numbered.parse(solution);
     case 'chooseImage':
       return task.object === solution;
-    case 'calculateTime':
-      return task.solution === parseInt(solution, 10);
     default:
       throw new Error(`validating solutions for this type of task (${type}) is not implemented yet`);
   }
