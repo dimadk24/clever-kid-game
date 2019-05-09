@@ -1,0 +1,23 @@
+.score-window {
+  width: 200px;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 15px;
+  border-radius: 15px;
+
+  .score-window__name {
+    text-align: center;
+  }
+
+  .score-window__header {
+    display: flex;
+    margin: 5px 0;
+    font-weight: bold;
+  }
+
+  .score-window__header > span {
+    width: 50%;
+    text-align: center;
+  }
+}

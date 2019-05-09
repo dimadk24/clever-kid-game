@@ -1,0 +1,36 @@
+[
+  {
+    "object": "alarm",
+    "suggestions": [
+      "alarm",
+      "flower",
+      "ship"
+    ]
+  },
+  {
+    "object": "flower",
+    "suggestions": [
+      "alarm",
+      "train",
+      "ship",
+      "flower"
+    ]
+  },
+  {
+    "object": "ship",
+    "suggestions": [
+      "alarm",
+      "ship",
+      "train"
+    ]
+  },
+  {
+    "object": "train",
+    "suggestions": [
+      "ship",
+      "flower",
+      "train",
+      "alarm"
+    ]
+  }
+]

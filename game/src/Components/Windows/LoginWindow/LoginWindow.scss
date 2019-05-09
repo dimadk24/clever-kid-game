@@ -1,0 +1,43 @@
+.login-window {
+  top: 50%;
+  transform: translate(-50%, -50%) !important;
+  background-color: white;
+  padding: 20px 30px;
+  border-radius: 15px;
+  font-size: 1.3em;
+
+  .login-window__row {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+
+    input {
+      width: 100px;
+      margin-left: 10px;
+      border: 1px solid black;
+      box-shadow: none;
+      padding: 3px 7px;
+      border-radius: 5px;
+      font-size: 0.7em;
+    }
+  }
+
+  .login-window__error-message {
+    visibility: hidden;
+    font-size: 0.9em;
+    color: red;
+  }
+
+  .login-window__error-message.visible {
+    visibility: visible;
+  }
+
+  .invalid input {
+    border-color: red;
+  }
+
+  .login-window__row:last-child {
+    margin-top: 15px;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,24 @@
+.monster-counter {
+  width: 160px;
+  top: 20px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.monster-counter__monster-image {
+  width: 70px;
+}
+
+.monster-counter__x,
+.monster-counter__number {
+  font-weight: 800;
+  font-size: 1.7em;
+}
+
+.monster-counter__x {
+  color: red;
+}

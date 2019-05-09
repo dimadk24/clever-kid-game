@@ -1,0 +1,31 @@
+.health-bar,
+.health-bar__progress {
+  height: 25px;
+  width: 200px;
+}
+
+.health-bar {
+  position: relative;
+  margin-bottom: 5px;
+  overflow: hidden;
+  background: orangered;
+  border-radius: 7px;
+
+  .health-bar__text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    margin-top: 2px;
+    text-shadow: #fff 0 0 10px;
+    font-weight: bold;
+    font-size: larger;
+  }
+
+  .health-bar__progress {
+    background: antiquewhite;
+    position: absolute;
+    top: 0;
+    transition-duration: 300ms;
+  }
+
+}

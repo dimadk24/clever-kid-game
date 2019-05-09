@@ -1,0 +1,40 @@
+[
+  {
+    "parts": [
+      "Nice, I didn't",
+      "that one"
+    ],
+    "suggestions": [
+      "knew",
+      "knee",
+      "know",
+      "known"
+    ],
+    "solution": "know"
+  },
+  {
+    "parts": [
+      "The",
+      "of Unix is full of these stories"
+    ],
+    "suggestions": [
+      "future",
+      "history",
+      "bank"
+    ],
+    "solution": "history"
+  },
+  {
+    "parts": [
+      "I'm coding",
+      "11 yo"
+    ],
+    "suggestions": [
+      "while",
+      "for",
+      "during",
+      "since"
+    ],
+    "solution": "since"
+  }
+]

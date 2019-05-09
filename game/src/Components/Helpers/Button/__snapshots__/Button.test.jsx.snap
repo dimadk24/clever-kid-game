@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button should match snapshot with 2 classes 1`] = `
+<button
+  className="button class another-class"
+  type="button"
+>
+  test
+</button>
+`;
+
+exports[`Button should match snapshot with a class 1`] = `
+<button
+  className="button class"
+  type="button"
+>
+  test
+</button>
+`;
+
+exports[`Button should match snapshot without classes 1`] = `
+<button
+  className="button "
+  type="button"
+>
+  test
+</button>
+`;

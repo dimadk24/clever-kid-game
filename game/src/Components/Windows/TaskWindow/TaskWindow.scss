@@ -1,0 +1,39 @@
+.task__window {
+  top: 50%;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 10px 20px;
+  border-radius: 15px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.task__window.success,
+.task__window.fail {
+  border-width: 4px;
+  border-style: solid;
+}
+
+.task__window.success {
+  border-color: #48d248;
+}
+
+.task__window.fail {
+  border-color: darkred;
+}
+
+.task__window__close {
+  align-self: flex-end;
+  font-size: larger;
+  padding: 2px;
+  margin-bottom: 10px;
+}
+
+.task__window__close:hover,
+.task__window__close:active {
+  color: #be0a0a;
+  background-color: white;
+}

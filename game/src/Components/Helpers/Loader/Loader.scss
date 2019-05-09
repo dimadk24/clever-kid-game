@@ -1,0 +1,10 @@
+.loader.m {
+  $spinkit-spinner-margin: 20px auto;
+  @import '~spinkit/scss/spinners/8-circle';
+}
+
+.loader.s {
+  $spinkit-spinner-margin: 10px auto;
+  $spinkit-size: 20px;
+  @import '~spinkit/scss/spinners/8-circle';
+}

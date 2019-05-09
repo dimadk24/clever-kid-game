@@ -1,0 +1,15 @@
+.score-item {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+  border-radius: 5px;
+
+  span {
+    width: 50%;
+    text-align: center;
+  }
+}
+
+.score-item:nth-child(odd) {
+  background-color: lightgrey;
+}

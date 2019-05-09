@@ -1,4 +1,5 @@
 .idea
 node_modules
-*.bundle.js
-*.log
+dist
+firebaseConfig.json
+bundle_stats.json

@@ -1,0 +1,21 @@
+.buttons-question {
+  width: 100%;
+}
+
+.buttons-question__content {
+  margin: 5px auto;
+}
+
+.buttons-question__answers {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+.button-question__button {
+  margin-right: 10px;
+}
+
+.button-question__button:last-child {
+  margin-right: 0;
+}
